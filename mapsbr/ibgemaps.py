@@ -66,7 +66,7 @@ def read_geojson(geojson):
 
 @np.vectorize
 @utils.memoize
-def to_geo(location, geo="states"):
+def geocode(location, geolevel="states"):
     """
     Vectorized function to turn location
     code or name into its corresponding
