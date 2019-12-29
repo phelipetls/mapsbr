@@ -21,8 +21,8 @@ rj, rondonia = get_json("33"), get_json("11")
 
 
 @patch("mapsbr.ibgemaps.get_geojson", side_effect=[rj, rondonia] * 4)
-@patch("mapsbr.ibgemaps.geocode", side_effect=[33, 11] * 2)
-class TestToGeo(unittest.TestCase):
+@patch("mapsbr.ibgemaps.tools.ibge_encode", side_effect=[33, 11] * 2)
+class TestGeoCode(unittest.TestCase):
 
     geometries = (Point, Polygon, MultiPolygon, LineString)
 
