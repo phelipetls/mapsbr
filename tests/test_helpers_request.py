@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 from mapsbr.helpers.request import get_geojson
 
 
-class TestUtils(unittest.TestCase):
+class TestRequestWrapper(unittest.TestCase):
 
     @patch.object(requests.Session, "get")
     def test_request_if_raises_HTTP_error(self, mocked_get):
