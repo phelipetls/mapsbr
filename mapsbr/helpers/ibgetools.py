@@ -27,9 +27,42 @@ def ibge_encode(locations, geolevel):
     ValueError
         If invalid geographic level is passed.
     """
-    err_msg = "Numbers or strings representing digits cannot be a location name"
+    err_msg = "Cannot encode numbers or strings representing numbers"
     assert all([utils.assert_number(location) for location in locations]), err_msg
     locations_dict = map_name_to_code(geolevel)
+    return utils.vectorized_get(locations_dict, locations)
+
+
+def ibge_decode(locations, geolevel):
+    """
+    Vectorized function to turn locations
+    codes into their corresponding IBGE name.
+
+    Parameters
+    ----------
+    locations : str, iterables, Series, GeoSeries
+        Series with locations' codes.
+
+    geolevel : str
+        Geographic level, e.g. "estados", "mesoregions".
+
+    Returns
+    -------
+    ndarray
+
+    Raises
+    ------
+    AssertionError
+        If try to pass numbers or strings as numbers.
+
+    ValueError
+        If invalid geographic level is passed.
+    """
+    try:
+        locations = [int(location) for location in locations]
+    except ValueError:
+        raise ValueError("Cannot decode numbers")
+    locations_dict = map_code_to_name(geolevel)
     return utils.vectorized_get(locations_dict, locations)
 
 
@@ -41,6 +74,16 @@ def map_name_to_code(geolevel):
     url = build_url(geolevel)
     locations = get_geojson(url)
     return {location["nome"]: location["id"] for location in locations}
+
+
+def map_code_to_name(geolevel):
+    """
+    Make dictionary to map location code
+    to IBGE name.
+    """
+    url = build_url(geolevel)
+    locations = get_geojson(url)
+    return {location["id"]: location["nome"] for location in locations}
 
 
 def build_url(geolevel):

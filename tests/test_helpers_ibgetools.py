@@ -47,6 +47,33 @@ class TestIbgeEncode(unittest.TestCase):
             ibgetools.ibge_encode([0, 1], "states")
 
 
+@patch("mapsbr.helpers.ibgetools.get_geojson", mocked_get_geojson)
+class TestIbgeDecode(unittest.TestCase):
+
+    def test_ibge_decode(self):
+        locations = [33, 11, 12]
+        test = ibgetools.ibge_decode(locations, "states")
+        correct = ["Rio de Janeiro", "Rondônia", "Acre"]
+        self.assertListEqual(test.tolist(), correct)
+
+    def test_ibge_decode_int(self):
+        locations = [33]
+        test = ibgetools.ibge_decode(locations, "states")
+        correct = ["Rio de Janeiro"]
+        self.assertListEqual(test.tolist(), correct)
+
+    def test_ibge_decode_optimization(self):
+        ibgetools.map_code_to_name = Mock()
+        ibgetools.ibge_decode([33, 11, 12], "states")
+        ibgetools.map_code_to_name.assert_called_once_with("states")
+
+    def test_ibge_decode_if_raises_when_invalid_geo(self):
+        with self.assertRaises(ValueError):
+            ibgetools.ibge_decode([33], "invalid")
+
+    def test_ibge_decode_if_raises_when_invalid_location_name_int(self):
+        with self.assertRaises(ValueError):
+            ibgetools.ibge_decode(["Rio de Janeiro"], "states")
 
 
 if __name__ == "__main__":
