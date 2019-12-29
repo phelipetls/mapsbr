@@ -16,7 +16,7 @@ def mocked_get_geojson():
         return json.load(json_file)
 
 
-class TestUtils(unittest.TestCase):
+class TestIbgeEncode(unittest.TestCase):
 
     @patch("mapsbr.helpers.request.get_geojson", mocked_get_geojson)
     def test_ibge_encode(self):
