@@ -2,7 +2,7 @@ from . import utils
 from .request import get_geojson
 
 
-def ibge_encode(locations, geolevel="states"):
+def ibge_encode(locations, geolevel):
     """
     Vectorized function to turn locations
     names into their corresponding IBGE code.

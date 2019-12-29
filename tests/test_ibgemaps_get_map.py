@@ -21,11 +21,11 @@ def mocked_get_geojson(url):
 class TestGetMap(unittest.TestCase):
 
     def test_get_map(self):
-        gdf = ibgemaps.get_map(None)  # dummy call
+        gdf = ibgemaps.get_map(None, "states")  # dummy call
         self.assertTrue(isinstance(gdf, gpd.GeoDataFrame))
 
     def test_columns(self):
-        gdf = ibgemaps.get_map(None)  # dummy call
+        gdf = ibgemaps.get_map(None, "states")  # dummy call
         test = gdf.columns.tolist()
         correct = ["location", "geometry"]
         self.assertListEqual(test, correct)

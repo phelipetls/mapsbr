@@ -10,32 +10,28 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 from mapsbr.helpers import ibgetools
 
 
-def mocked_get_geojson():
-    json_path = Path(__file__).resolve().parent / "sample_json" / "estados"
+def mocked_get_geojson(url):
+    json_path = Path(__file__).resolve().parent / "sample_jsons" / "estados"
     with json_path.open() as json_file:
         return json.load(json_file)
 
 
+@patch("mapsbr.helpers.ibgetools.get_geojson", mocked_get_geojson)
 class TestIbgeEncode(unittest.TestCase):
 
-    @patch("mapsbr.helpers.request.get_geojson", mocked_get_geojson)
     def test_ibge_encode(self):
-        locations = ["Rio de Janeiro", "Rondônia", "Acre"]
-        test = ibgetools.ibge_encode(locations)
+        test = ibgetools.ibge_encode(["Rio de Janeiro", "Rondônia", "Acre"], "states")
         correct = [33, 11, 12]
         self.assertListEqual(test.tolist(), correct)
 
-    @patch("mapsbr.helpers.request.get_geojson", mocked_get_geojson)
     def test_ibge_encode_int(self):
-        locations = ["Rio de Janeiro"]
-        test = ibgetools.ibge_encode(locations, "estado")
+        test = ibgetools.ibge_encode(["Rio de Janeiro"], "states")
         correct = [33]
         self.assertListEqual(test.tolist(), correct)
 
-    @patch("mapsbr.helpers.request.get_geojson", mocked_get_geojson)
     def test_ibge_encode_optimization(self):
         ibgetools.map_name_to_code = Mock()
-        ibgetools.ibge_encode(["Rio de Janeiro", "Rondônia", "Acre"])
+        ibgetools.ibge_encode(["Rio de Janeiro", "Rondônia", "Acre"], "states")
         ibgetools.map_name_to_code.assert_called_once_with("states")
 
     def test_ibge_encode_if_raises_when_invalid_geo(self):
@@ -44,11 +40,13 @@ class TestIbgeEncode(unittest.TestCase):
 
     def test_ibge_encode_if_raises_when_invalid_location_name_str(self):
         with self.assertRaises(AssertionError):
-            ibgetools.ibge_encode(["0", "1"])
+            ibgetools.ibge_encode(["0", "1"], "states")
 
     def test_ibge_encode_if_raises_when_invalid_location_name_int(self):
         with self.assertRaises(AssertionError):
-            ibgetools.ibge_encode([0, 1])
+            ibgetools.ibge_encode([0, 1], "states")
+
+
 
 
 if __name__ == "__main__":
