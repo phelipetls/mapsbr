@@ -7,7 +7,7 @@ from unittest.mock import Mock, patch
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from mapsbr import tools
+from mapsbr.helpers import tools
 
 
 def mocked_get_geojson():
