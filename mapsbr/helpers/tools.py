@@ -1,5 +1,5 @@
-from .helpers import utils
-from .helpers.request import get_geojson
+from . import utils
+from .request import get_geojson
 
 
 def ibge_encode(locations, geolevel="states"):

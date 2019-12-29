@@ -1,8 +1,7 @@
 import shapely
 import numpy as np
 import geopandas as gpd
-from .tools import geocode
-from .helpers import utils
+from .helpers import utils, tools
 from .helpers.request import get_geojson
 
 
@@ -78,7 +77,7 @@ def geocode(location, geolevel="states"):
         Series with locations' names
     """
     if utils.assert_number(location) and location != "BR":
-        location = ibge_encode(location, geolevel)
+        location = tools.ibge_encode(location, geolevel)
     url = build_url(location)
     geojson = get_geojson(url)
     features = utils.get_features(geojson)
