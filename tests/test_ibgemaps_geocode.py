@@ -26,17 +26,17 @@ class TestToGeo(unittest.TestCase):
 
     geometries = (Point, Polygon, MultiPolygon, LineString)
 
-    def test_to_geo_with_codes(self, mock1, mock2):
+    def test_geocode_with_codes(self, mock1, mock2):
         test = ibgemaps.geocode([33, 11], "municipios")  # dummy call
         cond = all([isinstance(item, self.geometries) for item in test])
         self.assertTrue(cond)
 
-    def test_to_geo_with_names(self, mock1, mock2):
+    def test_geocode_with_names(self, mock1, mock2):
         test = ibgemaps.geocode(["Rio de Janeiro", "Rondônia"])  # dummy call
         cond = all([isinstance(item, self.geometries) for item in test])
         self.assertTrue(cond)
 
-    def test_to_geo_consistency(self, mock1, mock2):
+    def test_geocode_consistency(self, mock1, mock2):
         codes = ibgemaps.geocode([33, 11])  # dummy call
         names = ibgemaps.geocode(["Rio de Janeiro", "Rondônia"])  # dummy call
         self.assertListEqual(codes.tolist(), names.tolist())
