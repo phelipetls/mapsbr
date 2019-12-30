@@ -6,7 +6,7 @@ import functools
 s = requests.Session()
 
 
-@functools.lru_cache(maxsize=128)
+@functools.lru_cache(maxsize=16)
 def get_geojson(url, **kwargs):
     response = s.get(url, timeout=60, **kwargs)
     response.raise_for_status
