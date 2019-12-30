@@ -27,7 +27,7 @@ class TestGetMap(unittest.TestCase):
     def test_columns(self):
         gdf = ibgemaps.get_map(None)  # dummy call
         test = gdf.columns.tolist()
-        correct = ["location", "geometry"]
+        correct = ["geometry"]
         self.assertListEqual(test, correct)
 
 

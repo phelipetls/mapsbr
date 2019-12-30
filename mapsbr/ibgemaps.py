@@ -45,11 +45,16 @@ def build_url(code, including=None):
 
 
 resolutions = {
+    "macrorregioes": 1,
     "macroregions": 1,
+    "estados": 2,
     "states": 2,
+    "mesorregioes": 3,
     "mesoregions": 3,
+    "microrregioes": 4,
     "microregions": 4,
-    "cities": 5,
+    "municipios": 5,
+    "municipalities": 5,
 }
 
 
