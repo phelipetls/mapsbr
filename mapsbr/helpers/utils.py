@@ -31,3 +31,8 @@ def get_features(geojson):
     except KeyError:
         raise KeyError(f"{geojson} is an invalid GeoJSON. Not a feature collection")
     return features
+
+
+@np.vectorize
+def from_iso_8859_1_to_utf_8(s):
+    return bytes(s, "iso-8859-1").decode("utf-8")
