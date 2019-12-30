@@ -5,7 +5,7 @@ from .helpers import utils, ibgetools
 from .helpers.request import get_geojson
 
 
-def get_map(location, geolevel, include=None):
+def get_map(location, including=None, geolevel="states"):
     """
     Get and turn a GeoJSON of a IBGE
     location into a GeoSeries.
@@ -16,7 +16,7 @@ def get_map(location, geolevel, include=None):
         Location identifier (code or string)
         as in IBGE.
 
-    include : str, default None
+    including : str, default None
         Map level of detail, e.g. "cities" etc.
         By default, no details.
 
@@ -27,18 +27,19 @@ def get_map(location, geolevel, include=None):
     """
     if isinstance(location, str) and location != "BR":
         location = ibgetools.ibge_encode(location, geolevel)
-    url = build_url(location, include)
+    url = build_url(location, including)
     geojson = get_geojson(url)
-    return gpd.GeoDataFrame(read_geojson(geojson))
+    parsed_geojson = read_geojson(geojson, including)
+    return gpd.GeoDataFrame(parsed_geojson)
 
 
-def build_url(code, include=None):
+def build_url(code, including=None):
     """
     Helper function to build valid URL
     for IBGE API.
     """
     baseurl = "http://servicodados.ibge.gov.br/api/v2/malhas/"
-    resolution = resolutions.get(include, 0)
+    resolution = resolutions.get(including, 0)
     url = f"{baseurl}{code}?resolucao={resolution}&formato=application/vnd.geo+json"
     return url
 

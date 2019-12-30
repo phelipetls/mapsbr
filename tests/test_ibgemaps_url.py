@@ -16,7 +16,7 @@ class TestUrlBuilders(unittest.TestCase):
 
     def test_build_url_with_resolution(self):
         test = "http://servicodados.ibge.gov.br/api/v2/malhas/3304?resolucao=5&formato=application/vnd.geo+json"
-        correct = ibgemaps.build_url(3304, include="cities")
+        correct = ibgemaps.build_url(3304, including="municipalities")
         self.assertEqual(test, correct)
 
 
