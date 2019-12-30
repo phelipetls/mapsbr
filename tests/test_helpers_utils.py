@@ -20,7 +20,7 @@ class TestUtils(unittest.TestCase):
         D = {"A": 1, "B": 2, "C": 3, "D": 4}
         L = ["A", "B", "E"]
         test = utils.vectorized_get(D, L)
-        correct = [1, 2, 0]
+        correct = [1, 2, -1]
         self.assertListEqual(test.tolist(), correct)
 
     def test_get_features(self):

@@ -13,7 +13,7 @@ def memoize(function):
 
 @np.vectorize
 def vectorized_get(dictionary, key):
-    return dictionary.get(key, False)
+    return dictionary.get(key, -1)
 
 
 @np.vectorize

@@ -27,6 +27,8 @@ def get_map(location, including=None, geolevel="states"):
     """
     if isinstance(location, str) and location != "BR":
         location = ibgetools.ibge_encode(location, geolevel)
+    if location == -1:
+        return gpd.GeoSeries(shapely.geometry.Polygon([]))
     url = build_url(location, including)
     geojson = get_geojson(url)
     parsed_geojson = parse_geojson(geojson)

@@ -61,8 +61,7 @@ def ibge_decode(locations, geolevel):
         locations = [int(location) for location in locations]
     except ValueError:
         raise ValueError("Cannot decode numbers")
-    locations_dict = map_code_to_name(geolevel)
-    return utils.vectorized_get(locations_dict, locations)
+    return utils.vectorized_get(map_code_to_name(geolevel), locations)
 
 
 def map_name_to_code(geolevel):

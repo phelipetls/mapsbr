@@ -20,15 +20,20 @@ def mocked_get_geojson(url):
 @patch("mapsbr.ibgemaps.get_geojson", mocked_get_geojson)
 class TestGetMap(unittest.TestCase):
 
-    def test_get_map(self):
-        gdf = ibgemaps.get_map(None)  # dummy call
-        self.assertTrue(isinstance(gdf, gpd.GeoDataFrame))
+    def setUp(self):
+        self.gdf = ibgemaps.get_map(3304, including="municipios")
 
-    def test_columns(self):
-        gdf = ibgemaps.get_map(None)  # dummy call
-        test = gdf.columns.tolist()
-        correct = ["geometry"]
-        self.assertListEqual(test, correct)
+    def test_get_map(self):
+        self.assertTrue(isinstance(self.gdf, gpd.GeoSeries))
+
+
+class TestGetMapMinusOne(unittest.TestCase):
+
+    def setUp(self):
+        self.test = ibgemaps.get_map(-1)
+
+    def test_get_map(self):
+        self.assertTrue(self.test.is_empty.values)
 
 
 if __name__ == "__main__":
