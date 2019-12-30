@@ -35,7 +35,7 @@ def get_map(location, including=None, geolevel=None):
     url = build_url(location, including)
     geojson = get_geojson(url)
     parsed_geojson = parse_geojson(geojson)
-    return gpd.GeoSeries(parsed_geojson, dtype="category")
+    return gpd.GeoSeries(parsed_geojson)
 
 
 def build_url(code, including=None):
