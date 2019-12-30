@@ -1,5 +1,6 @@
 import pandas as pd
 import geopandas as gpd
+from .helpers import utils
 from shapely.geometry import shape
 from .helpers.request import get_geojson
 
@@ -68,7 +69,8 @@ def parse_geojson(geojson):
     Helper function to read GeoJSON to
     get all geometries and properties.
     """
-    property_dict = geojson["features"][0].get("properties", "property")
+    features = utils.get_features(geojson)
+    property_dict = features[0].get("properties", "property")
     property_name = list(property_dict)[0]
     return [
         {
