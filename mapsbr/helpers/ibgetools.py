@@ -96,24 +96,14 @@ def build_url(geolevel):
 
 
 arguments_dict = {
-    "estado": "estados",
     "estados": "estados",
-    "state": "estados",
     "states": "estados",
-    "mesorregiao": "mesorregioes",
     "mesorregioes": "mesorregioes",
-    "mesoregion": "mesorregioes",
     "mesoregions": "mesorregioes",
-    "macrorregiao": "regioes",
-    "macorregioes": "regioes",
-    "macroregion": "regioes",
+    "macrorregioes": "regioes",
     "macroregions": "regioes",
-    "microrregiao": "microrregioes",
     "microrregioes": "microrregioes",
-    "microregion": "microrregioes",
     "microregions": "microrregioes",
-    "municipio": "municipios",
     "municipios": "municipios",
-    "municipality": "municipios",
-    "municipality": "municipios",
+    "municipalities": "municipios",
 }
