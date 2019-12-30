@@ -35,7 +35,7 @@ def get_map(location, including=None, geolevel=None):
     url = build_url(location, including)
     geojson = get_geojson(url)
     parsed_geojson = parse_geojson(geojson)
-    return gpd.GeoDataFrame(parsed_geojson)
+    return gpd.GeoSeries(parsed_geojson, dtype="category")
 
 
 def build_url(code, including=None):
@@ -65,15 +65,11 @@ resolutions = {
 
 def parse_geojson(geojson):
     features = utils.get_features(geojson)
-    return [
-        {
-            "geometry": shapely.geometry.shape(feature["geometry"])
-        }
-        for feature in features
-    ]
+    return [shapely.geometry.shape(feature["geometry"]) for feature in features]
 
 
 @np.vectorize
+@utils.memoize
 def geocode(location, geolevel="states"):
     """
     Vectorized function to turn location
