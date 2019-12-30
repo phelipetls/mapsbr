@@ -34,22 +34,11 @@ def get_map(service, baseurl=None, service_type="MapServer", layer=0):
     return gpd.GeoDataFrame(maps)
 
 
-def build_url(service, baseurl=None, service_type="MapServer", layer=0, count=0):
-    """
-    Helper function to build valid ARCGIS url.
-    """
-    if baseurl is None:
-        baseurl = "https://mapasinterativos.ibge.gov.br/arcgis/rest/services"
-    baseurl = baseurl.rstrip("/")
-    where = f"where=objectId>={count}+and+objectId<{count+1000}"
-    return f"{baseurl}/{service}/{service_type}/{layer}/query?{where}&f=geojson"
-
-
 def get_all_features(service, baseurl=None, service_type="MapServer", layer=0):
     """
     Helper function to get all features from a
-    service layer. This is a work around the response's
-    1000 row limit.
+    service layer. This is a work around the API
+    1000 row limit per response.
     """
     count = 0
     while True:
@@ -60,6 +49,17 @@ def get_all_features(service, baseurl=None, service_type="MapServer", layer=0):
             count += 1000
         else:
             break
+
+
+def build_url(service, baseurl=None, service_type="MapServer", layer=0, count=0):
+    """
+    Helper function to build valid ARCGIS url.
+    """
+    if baseurl is None:
+        baseurl = "https://mapasinterativos.ibge.gov.br/arcgis/rest/services"
+    baseurl = baseurl.rstrip("/")
+    where = f"where=objectId>={count}+and+objectId<{count+1000}"
+    return f"{baseurl}/{service}/{service_type}/{layer}/query?{where}&f=geojson"
 
 
 def read_geojson(geojson):
