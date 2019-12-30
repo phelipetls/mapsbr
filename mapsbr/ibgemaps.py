@@ -5,7 +5,7 @@ from .helpers import utils, ibgetools
 from .helpers.request import get_geojson
 
 
-def get_map(location, including=None, geolevel="states"):
+def get_map(location, including=None, geolevel=None):
     """
     Get and turn a GeoJSON of a IBGE
     location into a GeoSeries.
@@ -26,6 +26,9 @@ def get_map(location, including=None, geolevel="states"):
         A GeoSeries with shapely objects only.
     """
     if isinstance(location, str) and location != "BR":
+        if geolevel is None:
+            geolevel = "states"
+            print("Using 'states' as geographic level to encode location name")
         location = ibgetools.ibge_encode(location, geolevel)
     if location == -1:
         return gpd.GeoSeries(shapely.geometry.Polygon([]))
