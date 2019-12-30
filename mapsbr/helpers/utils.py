@@ -17,7 +17,7 @@ def vectorized_get(dictionary, key):
 
 
 @np.vectorize
-def assert_number(x):
+def is_number(x):
     try:
         int(x)
         return False

@@ -77,10 +77,10 @@ def geocode(location, geolevel="states"):
 
     Parameters
     ----------
-    locations : str, iterables, Series, GeoSeries
-        Series with locations' names
+    locations : str, iterable
+        Locations' names
     """
-    if utils.assert_number(location) and location != "BR":
+    if utils.is_number(location) and location != "BR":
         location = ibgetools.ibge_encode(location, geolevel)
     url = build_url(location)
     geojson = get_geojson(url)
