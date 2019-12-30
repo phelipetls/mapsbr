@@ -18,13 +18,29 @@ def mocked_get_geojson(url):
 
 
 @patch("mapsbr.ibgemaps.get_geojson", mocked_get_geojson)
-class TestGetMap(unittest.TestCase):
+class TestGetMapCode(unittest.TestCase):
 
     def setUp(self):
-        self.gdf = ibgemaps.get_map(3304, including="municipios")
+        self.gdf = ibgemaps.get_map(3304)
 
     def test_get_map(self):
         self.assertTrue(isinstance(self.gdf, gpd.GeoSeries))
+
+
+@patch("mapsbr.ibgemaps.get_geojson", mocked_get_geojson)
+class TestGetMapCalls(unittest.TestCase):
+
+    @patch("mapsbr.helpers.ibgetools.ibge_encode")
+    def test_get_map_with_geolevel(self, mocked_ibge_encode):
+        mocked_ibge_encode.return_value = "Baixadas"
+        ibgemaps.get_map("Baixadas", geolevel="mesoregions")
+        mocked_ibge_encode.assert_called_with("Baixadas", "mesoregions")
+
+    @patch("mapsbr.helpers.ibgetools.ibge_encode")
+    def test_get_map_geolevel_none(self, mocked_ibge_encode):
+        mocked_ibge_encode.return_value = "Baixadas"
+        ibgemaps.get_map("Baixadas")
+        mocked_ibge_encode.assert_called_with("Baixadas", "states")
 
 
 class TestGetMapMinusOne(unittest.TestCase):
