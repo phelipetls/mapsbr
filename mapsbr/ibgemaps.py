@@ -69,7 +69,6 @@ def parse_geojson(geojson):
 
 
 @np.vectorize
-@utils.memoize
 def geocode(location, geolevel="states"):
     """
     Vectorized function to turn location
