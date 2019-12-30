@@ -45,7 +45,8 @@ def get_all_features(service, baseurl=None, service_type="MapServer", layer=0):
         url = build_url(service, baseurl, service_type, layer, count=count)
         geojson = get_geojson(url)
         if geojson["features"]:
-            yield pd.DataFrame(read_geojson(geojson))
+            parsed_geojson = parse_geojson(geojson)
+            yield pd.DataFrame(parsed_geojson)
             count += 1000
         else:
             break
@@ -62,7 +63,7 @@ def build_url(service, baseurl=None, service_type="MapServer", layer=0, count=0)
     return f"{baseurl}/{service}/{service_type}/{layer}/query?{where}&f=geojson"
 
 
-def read_geojson(geojson):
+def parse_geojson(geojson):
     """
     Helper function to read GeoJSON to
     get all geometries and properties.
