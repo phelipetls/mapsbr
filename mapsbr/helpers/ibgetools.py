@@ -28,7 +28,8 @@ def ibge_encode(locations, geolevel):
         If invalid geographic level is passed.
     """
     err_msg = "Cannot encode numbers or strings representing numbers"
-    assert all(utils.is_number(locations)), err_msg
+    # assert that all values do not represent / are numbers
+    assert not utils.is_number(locations).all(), err_msg
     return utils.vectorized_get(map_name_to_code(geolevel), locations)
 
 
@@ -52,15 +53,11 @@ def ibge_decode(locations, geolevel):
     Raises
     ------
     AssertionError
-        If try to pass numbers or strings as numbers.
-
-    ValueError
-        If invalid geographic level is passed.
+        If all values passed are strings or
+        if invalid geographic level is passed.
     """
-    try:
-        locations = [int(location) for location in locations]
-    except ValueError:
-        raise ValueError("Cannot decode numbers")
+    # assert all values are numbers
+    assert utils.is_number(locations).all(), "Cannot decode strings"
     return utils.vectorized_get(map_code_to_name(geolevel), locations)
 
 

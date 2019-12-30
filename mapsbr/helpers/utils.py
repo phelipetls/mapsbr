@@ -20,9 +20,9 @@ def vectorized_get(dictionary, key):
 def is_number(x):
     try:
         int(x)
-        return False
-    except ValueError:
         return True
+    except ValueError:
+        return False
 
 
 def get_features(geojson):
