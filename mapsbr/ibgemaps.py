@@ -57,7 +57,6 @@ def read_geojson(geojson):
     features = utils.get_features(geojson)
     return [
         {
-            "location": feature["properties"]["codarea"],
             "geometry": shapely.geometry.shape(feature["geometry"])
         }
         for feature in features
