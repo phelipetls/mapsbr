@@ -20,25 +20,27 @@ def get_json(filename=None):
 rj, rondonia = get_json("33"), get_json("11")
 
 
-@patch("mapsbr.ibgemaps.get_geojson", side_effect=[rj] + [rj, rondonia] * 4)
-@patch("mapsbr.ibgemaps.ibgetools.ibge_encode", side_effect=[33, 11])
 class TestGeoCode(unittest.TestCase):
 
     geometries = (Point, Polygon, MultiPolygon, LineString)
 
-    def test_geocode_with_single_code(self, mock1, mock2):
+    @patch("mapsbr.ibgemaps.get_geojson", side_effect=[rj] + [rj, rondonia] * 4)
+    @patch("mapsbr.ibgemaps.ibgetools.ibge_encode", side_effect=[33, 11])
+    def setUp(self, mock1, mock2):
+        self.codes = ibgemaps.geocode([33, 11], "municipios")
+        self.names = ibgemaps.geocode(["Rio de Janeiro", "Rondônia"], "municipios")
+
+    def test_geocode_with_single_code(self):
         test = ibgemaps.geocode(33, "municipios")  # dummy call
         cond = all([isinstance(item, self.geometries) for item in test])
         self.assertTrue(cond)
 
-    def test_geocode_with_codes(self, mock1, mock2):
-        test = ibgemaps.geocode([33, 11], "municipios")  # dummy call
-        cond = all([isinstance(item, self.geometries) for item in test])
+    def test_geocode_with_codes(self):
+        cond = all([isinstance(item, self.geometries) for item in self.codes])
         self.assertTrue(cond)
 
-    def test_geocode_with_names(self, mock1, mock2):
-        test = ibgemaps.geocode(["Rio de Janeiro", "Rondônia"])  # dummy call
-        cond = all([isinstance(item, self.geometries) for item in test])
+    def test_geocode_with_names(self):
+        cond = all([isinstance(item, self.geometries) for item in self.names])
         self.assertTrue(cond)
 
 
