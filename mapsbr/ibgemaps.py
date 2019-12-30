@@ -29,7 +29,7 @@ def get_map(location, including=None, geolevel="states"):
         location = ibgetools.ibge_encode(location, geolevel)
     url = build_url(location, including)
     geojson = get_geojson(url)
-    parsed_geojson = parse_geojson(geojson, including)
+    parsed_geojson = parse_geojson(geojson)
     return gpd.GeoDataFrame(parsed_geojson)
 
 
