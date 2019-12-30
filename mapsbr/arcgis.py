@@ -1,7 +1,7 @@
-import requests
 import pandas as pd
 import geopandas as gpd
 from shapely.geometry import shape
+from .helpers.request import get_geojson
 
 
 def get_map(service, baseurl=None, service_type="MapServer", layer=0):
@@ -54,7 +54,7 @@ def get_all_features(service, baseurl=None, service_type="MapServer", layer=0):
     count = 0
     while True:
         url = build_url(service, baseurl, service_type, layer, count=count)
-        geojson = requests.get(url).json()
+        geojson = get_geojson(url)
         if geojson["features"]:
             yield pd.DataFrame(read_geojson(geojson))
             count += 1000
@@ -97,7 +97,7 @@ def search(baseurl=None, where="services"):
     """
     if baseurl is None:
         baseurl = "https://mapasinterativos.ibge.gov.br/arcgis/rest/services"
-    services = requests.get(f"{baseurl}?f=json").json()[where]
+    services = get_geojson(f"{baseurl}?f=json")[where]
     return pd.DataFrame(services)
 
 # vi: nowrap
