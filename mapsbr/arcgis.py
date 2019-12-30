@@ -80,6 +80,7 @@ def parse_geojson(geojson):
             property_name: list(feature["properties"].values())[0],
         }
         for feature in geojson["features"]
+        if feature["geometry"]["coordinates"] != []
     ]
 
 
