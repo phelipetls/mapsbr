@@ -20,11 +20,16 @@ def get_json(filename=None):
 rj, rondonia = get_json("33"), get_json("11")
 
 
-@patch("mapsbr.ibgemaps.get_geojson", side_effect=[rj, rondonia] * 4)
-@patch("mapsbr.ibgemaps.ibgetools.ibge_encode", side_effect=[33, 11] * 2)
+@patch("mapsbr.ibgemaps.get_geojson", side_effect=[rj] + [rj, rondonia] * 4)
+@patch("mapsbr.ibgemaps.ibgetools.ibge_encode", side_effect=[33, 11])
 class TestGeoCode(unittest.TestCase):
 
     geometries = (Point, Polygon, MultiPolygon, LineString)
+
+    def test_geocode_with_single_code(self, mock1, mock2):
+        test = ibgemaps.geocode(33, "municipios")  # dummy call
+        cond = all([isinstance(item, self.geometries) for item in test])
+        self.assertTrue(cond)
 
     def test_geocode_with_codes(self, mock1, mock2):
         test = ibgemaps.geocode([33, 11], "municipios")  # dummy call
@@ -35,11 +40,6 @@ class TestGeoCode(unittest.TestCase):
         test = ibgemaps.geocode(["Rio de Janeiro", "Rondônia"])  # dummy call
         cond = all([isinstance(item, self.geometries) for item in test])
         self.assertTrue(cond)
-
-    def test_geocode_consistency(self, mock1, mock2):
-        codes = ibgemaps.geocode([33, 11])  # dummy call
-        names = ibgemaps.geocode(["Rio de Janeiro", "Rondônia"])  # dummy call
-        self.assertListEqual(codes.tolist(), names.tolist())
 
 
 if __name__ == "__main__":
