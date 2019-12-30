@@ -7,7 +7,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 from mapsbr import arcgis
 
 
-class TestArcGIS(unittest.TestCase):
+class TestArcGIS_BuidlURL(unittest.TestCase):
 
     def test_build_url(self):
         test = arcgis.build_url("BIOMA")
