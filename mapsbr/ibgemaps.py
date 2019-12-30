@@ -17,8 +17,14 @@ def get_map(location, including=None, geolevel=None):
         as in IBGE.
 
     including : str, default None
-        Map level of detail, e.g. "cities" etc.
-        By default, no details.
+        Map level of detail, e.g. "states"
+        "municipalities", etc.
+        By default, include no details.
+
+    geolevel : str
+        If location is a name, the geographic level
+        of that location. This is needed so the name
+        can be converted to IBGE's code.
 
     Returns
     -------
@@ -78,8 +84,18 @@ def geocode(location, geolevel="states"):
 
     Parameters
     ----------
-    locations : str, iterable
+    locations : int, str or iterable
         Locations' names
+
+    geolevel : str, default "states"
+        Geographic level of location, needed
+        if location is a string.
+
+    Returns
+    -------
+    ndarray
+        Numpy array with shapely geometric
+        objects.
     """
     if utils.is_number(location) and location != "BR":
         location = ibgetools.ibge_encode(location, geolevel)
