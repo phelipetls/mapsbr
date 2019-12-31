@@ -84,7 +84,7 @@ def parse_geojson(geojson):
     ]
 
 
-def search(baseurl=None, where="services"):
+def search(where="services", baseurl=None):
     """
     Search available resources in a given host.
 
