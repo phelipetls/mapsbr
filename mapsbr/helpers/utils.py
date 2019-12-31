@@ -34,5 +34,8 @@ def get_features(geojson):
 
 
 @np.vectorize
-def from_iso_8859_1_to_utf_8(s):
-    return bytes(s, "iso-8859-1").decode("utf-8")
+def from_iso_8859_1_to_utf_8(string):
+    try:
+        return bytes(string, "iso-8859-1").decode("utf-8")
+    except UnicodeDecodeError:
+        return string
