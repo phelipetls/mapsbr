@@ -1,5 +1,6 @@
 sphinx
 mapsbr
+sphinx-gallery
 seriesbr
 matplotlib
 IPython
