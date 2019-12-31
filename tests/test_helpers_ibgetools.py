@@ -20,19 +20,19 @@ def mocked_get_geojson(url):
 class TestIbgeEncode(unittest.TestCase):
 
     def test_ibge_encode(self):
-        test = ibgetools.ibge_encode(["Rio de Janeiro", "Rondônia", "Acre"], "states")
+        test = ibgetools.ibge_encode(["Rio de Janeiro", "Rondônia", "Acre"], "state")
         correct = [33, 11, 12]
         self.assertListEqual(test.tolist(), correct)
 
     def test_ibge_encode_int(self):
-        test = ibgetools.ibge_encode("Rio de Janeiro", "states")
+        test = ibgetools.ibge_encode("Rio de Janeiro", "state")
         correct = 33
         self.assertEqual(test, correct)
 
     def test_ibge_encode_optimization(self):
         ibgetools.map_name_to_code = Mock()
-        ibgetools.ibge_encode(["Rio de Janeiro", "Rondônia", "Acre"], "states")
-        ibgetools.map_name_to_code.assert_called_once_with("states")
+        ibgetools.ibge_encode(["Rio de Janeiro", "Rondônia", "Acre"], "state")
+        ibgetools.map_name_to_code.assert_called_once_with("state")
 
     def test_ibge_encode_if_raises_when_invalid_geo(self):
         with self.assertRaises(ValueError):
@@ -40,11 +40,11 @@ class TestIbgeEncode(unittest.TestCase):
 
     def test_ibge_encode_if_raises_when_invalid_location_name_str(self):
         with self.assertRaises(AssertionError):
-            ibgetools.ibge_encode(["0", "1"], "states")
+            ibgetools.ibge_encode(["0", "1"], "state")
 
     def test_ibge_encode_if_raises_when_invalid_location_name_int(self):
         with self.assertRaises(AssertionError):
-            ibgetools.ibge_encode([0, 1], "states")
+            ibgetools.ibge_encode([0, 1], "state")
 
 
 @patch("mapsbr.helpers.ibgetools.get_geojson", mocked_get_geojson)
@@ -52,20 +52,20 @@ class TestIbgeDecode(unittest.TestCase):
 
     def test_ibge_decode(self):
         locations = [33, 11, 12]
-        test = ibgetools.ibge_decode(locations, "states")
+        test = ibgetools.ibge_decode(locations, "state")
         correct = ["Rio de Janeiro", "Rondônia", "Acre"]
         self.assertListEqual(test.tolist(), correct)
 
     def test_ibge_decode_int(self):
         locations = 33
-        test = ibgetools.ibge_decode(locations, "states")
+        test = ibgetools.ibge_decode(locations, "state")
         correct = "Rio de Janeiro"
         self.assertEqual(test, correct)
 
     def test_ibge_decode_optimization(self):
         ibgetools.map_code_to_name = Mock()
-        ibgetools.ibge_decode([33, 11, 12], "states")
-        ibgetools.map_code_to_name.assert_called_once_with("states")
+        ibgetools.ibge_decode([33, 11, 12], "state")
+        ibgetools.map_code_to_name.assert_called_once_with("state")
 
     def test_ibge_decode_if_raises_when_invalid_geo(self):
         with self.assertRaises(ValueError):
@@ -73,7 +73,7 @@ class TestIbgeDecode(unittest.TestCase):
 
     def test_ibge_decode_if_raises_when_invalid_location_name_int(self):
         with self.assertRaises(AssertionError):
-            ibgetools.ibge_decode(["Rio de Janeiro"], "states")
+            ibgetools.ibge_decode(["Rio de Janeiro"], "state")
 
 
 if __name__ == "__main__":

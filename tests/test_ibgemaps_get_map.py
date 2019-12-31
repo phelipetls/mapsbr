@@ -33,14 +33,14 @@ class TestGetMapCalls(unittest.TestCase):
     @patch("mapsbr.helpers.ibgetools.ibge_encode")
     def test_get_map_with_geolevel(self, mocked_ibge_encode):
         mocked_ibge_encode.return_value = "Baixadas"
-        ibgemaps.get_map("Baixadas", geolevel="mesoregions")
-        mocked_ibge_encode.assert_called_with("Baixadas", "mesoregions")
+        ibgemaps.get_map("Baixadas", geolevel="mesoregion")
+        mocked_ibge_encode.assert_called_with("Baixadas", "mesoregion")
 
     @patch("mapsbr.helpers.ibgetools.ibge_encode")
     def test_get_map_geolevel_none(self, mocked_ibge_encode):
         mocked_ibge_encode.return_value = "Baixadas"
         ibgemaps.get_map("Baixadas")
-        mocked_ibge_encode.assert_called_with("Baixadas", "states")
+        mocked_ibge_encode.assert_called_with("Baixadas", "state")
 
 
 class TestGetMapMinusOne(unittest.TestCase):
