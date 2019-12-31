@@ -18,7 +18,6 @@ provides data on the city of Rio de Janeiro. Let's, for example, plot the distri
 divisions.
 
 
-
 .. code-block:: default
 
 
@@ -53,6 +52,11 @@ divisions.
     (-43.83036038458216, -43.06193412774771, -23.09973631742922, -22.72917666587355)
 
 
+
+.. note:
+
+   This function unfortunately is considerably unreliable and only tested
+   in these two hosts. I'll surely put some work on improving it.
 
 From the same service, you could also plot some interesting things like
 the geographical distribution of municipal hospitals.
@@ -92,7 +96,7 @@ the geographical distribution of municipal hospitals.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  5.984 seconds)
+   **Total running time of the script:** ( 0 minutes  6.499 seconds)
 
 
 .. _sphx_glr_download_gallery_plot_rio_de_janeiro_districts.py:

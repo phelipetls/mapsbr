@@ -44,6 +44,7 @@ extensions = [
 sphinx_gallery_conf = {
     "examples_dirs": "examples",  # path to your example scripts
     "gallery_dirs": "gallery",  # path to where to save gallery generated output
+    'show_memory': True,
 }
 
 import warnings

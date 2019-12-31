@@ -10,7 +10,6 @@ Rio de Janeiro (city) districts
 # We will use a `server <https://pgeo3.rio.rj.gov.br/arcgis/rest/services/>`__ that
 # provides data on the city of Rio de Janeiro. Let's, for example, plot the district
 # divisions.
-# 
 
 from mapsbr import arcgis
 
@@ -27,6 +26,11 @@ plt.title("Rio de Janeiro city districts")
 plt.gca().axis("off")
 
 ###############################################################################
+# .. note:
+#
+#    This function unfortunately is considerably unreliable and only tested
+#    in these two hosts. I'll surely put some work on improving it.
+#
 # From the same service, you could also plot some interesting things like
 # the geographical distribution of municipal hospitals.
 

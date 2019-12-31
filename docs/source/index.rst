@@ -11,7 +11,7 @@ MapsBR
    :caption: Contents:
 
 **mapsbr** is a Python package to help you get brazilian geospatial data
-from official sources like IBGE or ArcGIS API.
+from official sources like IBGE or an ArcGIS server.
 
 First it downloads a GeoJSON from the web with `requests <https://2.python-requests.org/en/master/>`__, which gets
 parsed by `shapely <https://shapely.readthedocs.io/en/latest/manual.html#predicates-and-relationships>`__
@@ -33,7 +33,7 @@ Main Features
 Examples
 --------
 
-Learn how to use the package in examples section:
+Learn how to use the package with examples:
 
 .. toctree:: 
 
@@ -42,7 +42,7 @@ Learn how to use the package in examples section:
 Quick Demo
 ----------
 
-As a quick demonstration, let me demonstrate how one would plot the brazilian
+As a quick demonstration, let's see how one would plot the brazilian
 map including many sub geographical levels:
 
 .. ipython:: python
@@ -81,9 +81,6 @@ Support
 -------
 
 If you like the package, give this repo a star!
-
-.. |brazilian_maps| image:: ../../figs/brazilian_maps.png
-
 
 Indices and tables
 ==================

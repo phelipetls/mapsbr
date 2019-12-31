@@ -51,7 +51,7 @@ titles = ["Railways", "Highways", "Hidrographies"]
 
 import matplotlib.pyplot as plt
 
-fig, axes = plt.subplots(nrows=1, ncols=3)
+fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(15, 10))
 br = ibgemaps.get_map("BR")
 for ax, transport, title in zip(axes.flat, transports, titles):
     br.plot(ax=ax, color="white", edgecolor="gray")

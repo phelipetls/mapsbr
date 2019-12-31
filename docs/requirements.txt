@@ -3,3 +3,4 @@ mapsbr
 seriesbr
 matplotlib
 IPython
+memory-profiler
