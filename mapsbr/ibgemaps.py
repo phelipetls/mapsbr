@@ -1,4 +1,5 @@
 import shapely
+import functools
 import numpy as np
 import geopandas as gpd
 from .helpers import utils, ibgetools
@@ -32,9 +33,6 @@ def get_map(location, including=None, geolevel=None):
         A GeoSeries with shapely objects only.
     """
     if isinstance(location, str) and location != "BR":
-        if geolevel is None:
-            geolevel = "state"
-            print("Using 'state' as geographic level to encode location name")
         location = ibgetools.ibge_encode(location, geolevel)
     if location == -1:
         return gpd.GeoSeries(shapely.geometry.Polygon([]))
@@ -75,6 +73,7 @@ def parse_geojson(geojson):
 
 
 @np.vectorize
+@functools.lru_cache(maxsize=16)
 def geocode(location, geolevel=None):
     """
     Vectorized function to turn location
@@ -83,7 +82,7 @@ def geocode(location, geolevel=None):
 
     Parameters
     ----------
-    locations : int, str or iterable
+    locations : iterable
         Locations' names
 
     geolevel : str, default None
@@ -97,9 +96,6 @@ def geocode(location, geolevel=None):
         objects.
     """
     if not utils.is_number(location) and location != "BR":
-        if geolevel is None:
-            geolevel = "state"
-            print("Using 'state' as geographic level to encode location name")
         location = ibgetools.ibge_encode(location, geolevel)
     url = build_url(location)
     geojson = get_geojson(url)

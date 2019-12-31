@@ -11,40 +11,47 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 from mapsbr import ibgemaps
 
 
-def get_json(filename=None):
-    json_path = Path(__file__).resolve().parent / "sample_jsons" / filename
+def get_rj(*args, **kwargs):
+    json_path = Path(__file__).resolve().parent / "sample_jsons" / "33"
     with json_path.open() as json_file:
         return json.load(json_file)
 
 
-rj, rondonia = get_json("33"), get_json("11")
+def get_rondonia(*args, **kwargs):
+    json_path = Path(__file__).resolve().parent / "sample_jsons" / "11"
+    with json_path.open() as json_file:
+        return json.load(json_file)
 
 
-class TestGeoCode(unittest.TestCase):
+geometries = (Point, Polygon, MultiPolygon, LineString)
 
-    geometries = (Point, Polygon, MultiPolygon, LineString)
 
-    @patch("mapsbr.ibgemaps.get_geojson", side_effect=[rj] + [rj, rondonia] * 4)
-    @patch("mapsbr.ibgemaps.ibgetools.ibge_encode", side_effect=[33, 11])
-    def setUp(self, mock1, mock2):
-        self.codes = ibgemaps.geocode([33, 11], "municipios")
-        self.names = ibgemaps.geocode(["Rio de Janeiro", "Rondônia"], "municipios")
+@patch("mapsbr.ibgemaps.get_geojson", get_rj)
+class TestGeoCodeWithCode(unittest.TestCase):
 
     def test_geocode_with_single_code(self):
-        test = ibgemaps.geocode(33, "municipios")  # dummy call
-        cond = all([isinstance(item, self.geometries) for item in test])
-        self.assertTrue(cond)
+        test = ibgemaps.geocode([33])
+        # assert False, test
+        cond = isinstance(test[0], geometries)
+        self.assertTrue(cond and len(test) == 1)
 
-    def test_geocode_with_codes(self):
-        cond = all([isinstance(item, self.geometries) for item in self.codes])
-        self.assertTrue(cond)
 
-    def test_geocode_with_names(self):
-        cond = all([isinstance(item, self.geometries) for item in self.names])
-        self.assertTrue(cond)
+@patch("mapsbr.ibgemaps.get_geojson", get_rj)
+class TestGeoCodeWithName(unittest.TestCase):
+
+    @patch("mapsbr.helpers.ibgetools.ibge_encode")
+    def test_geocode_with_single_name(self, mocked_ibge_encode):
+        # don't make a request, this is code for rj
+        mocked_ibge_encode.return_value = 33
+        test = ibgemaps.geocode(["Rio de Janeiro"])
+        # test if ibge_encode is called right
+        mocked_ibge_encode.assert_called_with("Rio de Janeiro", None)
+        # test if results are geometric objects
+        cond = isinstance(test[0], geometries)
+        self.assertTrue(cond and len(test) == 1)
 
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main(failfast=True)
 
 # vi: nowrap
