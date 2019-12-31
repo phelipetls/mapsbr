@@ -1,0 +1,70 @@
+* MapsBR: Getting brazilian geospatial data with Python
+
+  *mapsbr* is a Python package to help you get brazilian geospatial
+data from official sources like IBGE or ArcGIS API.
+
+  First it downloads a GeoJSON from the web with [[https://2.python-requests.org/en/master/][=requests=]], which
+gets parsed by [[https://shapely.readthedocs.io/en/latest/manual.html#predicates-and-relationships][=shapely=]] and passed into a [[http://geopandas.org/][=geopandas=]] structure, a
+=GeoSeries= or a =GeoDataFrame=, which is your typical
+=pandas.DataFrame= but with magic properties and methods regarding
+=shapely= geometric objects on top of it.
+
+  It's then, for example, trivial to plot a map or to make a
+[[https://en.wikipedia.org/wiki/Choropleth_map][choropleth map]] with =geopandas=. It does it very well with the help of
+[[https://pypi.org/project/descartes/][descartes]] and [[https://matplotlib.org/][matplotlib]]. But you can do many other things like
+calculate area, get the interesection of two geometries etc.
+
+  This package is inspired by the R package [[https://github.com/ipeaGIT/geobr][geobr]].
+
+** Main Features
+   
+- Get and plot maps from IBGE.
+- Get and plot maps from an ArcGIS source.
+
+** Documentation
+
+See our documentation at [[https://mapsbr.readthedocs.io/][readthedocs]].
+
+** Example Usage
+
+   As a simple example, let me demonstrate how one would plot the
+brazilian map including many sub geographical levels:
+
+#+BEGIN_SRC python :session :exports both :results file
+
+from mapsbr import ibgemaps
+from matplotlib import pyplot as plt
+
+fig, axes = plt.subplots(nrows=2, ncols=3, figsize=(10, 8), clear=True)
+geographic_levels = ["macroregions", "states", "mesoregions", "microregions", "municipalities"]
+
+for level, ax in zip(geographic_levels, axes.flat):
+    ax.axis("off")
+    ax.set_title("Brazil map with\n{}".format(level))
+    ibgemaps.get_map("BR", including=level).plot(color="steelblue", edgecolor="khaki", ax=ax)
+
+for ax in axes.flat:
+    if not ax.has_data():
+        fig.delaxes(ax)
+
+fig.tight_layout()
+fig.savefig("figs/brazilian_maps.png")
+"figs/brazilian_maps.png"
+
+#+END_SRC
+
+#+RESULTS:
+[[file:figs/brazilian_maps.png]]
+
+** License
+
+   [[https://github.com/phelipetls/mapsbr/blob/master/LICENSE][MIT]]
+
+** Contributing
+
+   Please feel free to open an issue or a pull request in case you
+find any bugs or if you want to contribute. Thanks.
+
+** Support
+
+   If you like the package, give this repo a star!
