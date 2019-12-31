@@ -1,2 +1,5 @@
 geopandas
 requests
+descartes
+matplotlib
+shapely
