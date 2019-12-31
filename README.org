@@ -1,7 +1,6 @@
 * MapsBR: Getting brazilian geospatial data with Python
 
 [[https://pypi.org/project/mapsbr/][file:https://img.shields.io/pypi/v/mapsbr.svg]]
-[[https://pypistats.org/packages/mapsbr][file:https://img.shields.io/pypi/dm/mapsbr]]
 [[https://travis-ci.org/phelipetls/mapsbr][file:https://travis-ci.org/phelipetls/mapsbr.svg?branch=master]]
 [[https://codecov.io/gh/phelipetls/mapsbr][file:https://codecov.io/gh/phelipetls/mapsbr/branch/master/graph/badge.svg]]
 
