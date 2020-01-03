@@ -106,12 +106,4 @@ def search(where="services", baseurl=None):
     services = get_geojson(f"{baseurl}?f=json")[where]
     return pd.DataFrame(services)
 
-def get_metadata(resource, baseurl=None):
-    """
-    """
-    if baseurl is None:
-        baseurl = "https://mapasinterativos.ibge.gov.br/arcgis/rest/services"
-    metadata = get_geojson(f"{baseurl}/resource?f=json")
-    return pd.DataFrame.from_dict(metadata, orient="index")
-
 # vi: nowrap
