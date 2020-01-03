@@ -18,6 +18,7 @@ Let's first retrieve the data with the `seriesbr <seriesbr.readthedocs.io>`_ pac
 
 .. code-block:: default
 
+
     from seriesbr import ibge
 
     population = ibge.get_series(6462, 606, macroregions=True, last_n=1)
@@ -163,7 +164,9 @@ you'll need to call the `set_geometry("geometries_column")` method on the `GeoDa
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  3.233 seconds)
+   **Total running time of the script:** ( 0 minutes  4.400 seconds)
+
+**Estimated memory usage:**  19 MB
 
 
 .. _sphx_glr_download_gallery_plot_choropleth_map_population.py:

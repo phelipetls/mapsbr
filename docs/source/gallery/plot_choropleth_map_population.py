@@ -9,6 +9,7 @@ Population by macroregion
 # brazilian population by macroregion.
 #
 # Let's first retrieve the data with the `seriesbr <seriesbr.readthedocs.io>`_ package.
+
 from seriesbr import ibge
 
 population = ibge.get_series(6462, 606, macroregions=True, last_n=1)

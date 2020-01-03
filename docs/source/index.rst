@@ -6,6 +6,10 @@
 MapsBR
 ======
 
+|pypi|
+|travis|
+|codecov|
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
@@ -88,3 +92,11 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+.. |pypi| image:: https://img.shields.io/pypi/v/mapsbr.svg
+   :target: https://pypi.org/project/mapsbr/
+.. |travis| image:: https://travis-ci.org/phelipetls/mapsbr.svg?branch=master
+   :target: https://travis-ci.org/phelipetls/mapsbr
+.. |codecov| image:: https://codecov.io/gh/phelipetls/mapsbr/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/phelipetls/mapsbr
+

@@ -10,9 +10,6 @@ Unemployment rate by state
 #
 # Let's again retrieve the data with the `seriesbr <seriesbr.readthedocs.io>`_ package.
 
-import sys
-sys.path.append("../seriesbr")
-
 from seriesbr import ibge
 
 df = ibge.get_series(

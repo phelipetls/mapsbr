@@ -33,26 +33,6 @@ This page contains examples to help you learn how to use the package.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Population by macroregion">
-
-.. only:: html
-
- .. figure:: /gallery/images/thumb/sphx_glr_plot_choropleth_map_population_thumb.png
-
-     :ref:`sphx_glr_gallery_plot_choropleth_map_population.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /gallery/plot_choropleth_map_population
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="Unemployment rate by state">
 
 .. only:: html
@@ -70,6 +50,26 @@ This page contains examples to help you learn how to use the package.
    :hidden:
 
    /gallery/plot_choropleth_map_unemployment_by_state
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Population by macroregion">
+
+.. only:: html
+
+ .. figure:: /gallery/images/thumb/sphx_glr_plot_choropleth_map_population_thumb.png
+
+     :ref:`sphx_glr_gallery_plot_choropleth_map_population.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /gallery/plot_choropleth_map_population
 
 .. raw:: html
 
@@ -97,9 +97,9 @@ This page contains examples to help you learn how to use the package.
 
 .. only:: html
 
- .. figure:: /gallery/images/thumb/sphx_glr_plot_hidrographies_and_roads_thumb.png
+ .. figure:: /gallery/images/thumb/sphx_glr_plot_highways_railways_and_hidrographies_thumb.png
 
-     :ref:`sphx_glr_gallery_plot_hidrographies_and_roads.py`
+     :ref:`sphx_glr_gallery_plot_highways_railways_and_hidrographies.py`
 
 .. raw:: html
 
@@ -109,7 +109,27 @@ This page contains examples to help you learn how to use the package.
 .. toctree::
    :hidden:
 
-   /gallery/plot_hidrographies_and_roads
+   /gallery/plot_highways_railways_and_hidrographies
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Favelas in Rio de Janeiro">
+
+.. only:: html
+
+ .. figure:: /gallery/images/thumb/sphx_glr_plot_rio_de_janeiro_favelas_thumb.png
+
+     :ref:`sphx_glr_gallery_plot_rio_de_janeiro_favelas.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /gallery/plot_rio_de_janeiro_favelas
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>

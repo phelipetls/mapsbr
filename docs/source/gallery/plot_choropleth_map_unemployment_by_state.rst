@@ -19,9 +19,6 @@ Let's again retrieve the data with the `seriesbr <seriesbr.readthedocs.io>`_ pac
 .. code-block:: default
 
 
-    import sys
-    sys.path.append("../seriesbr")
-
     from seriesbr import ibge
 
     df = ibge.get_series(
@@ -84,7 +81,9 @@ Now let's plot it.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  7.005 seconds)
+   **Total running time of the script:** ( 0 minutes  5.066 seconds)
+
+**Estimated memory usage:**  11 MB
 
 
 .. _sphx_glr_download_gallery_plot_choropleth_map_unemployment_by_state.py:

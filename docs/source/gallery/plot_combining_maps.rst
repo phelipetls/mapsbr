@@ -50,7 +50,9 @@ map, e.g., with macroregions only, with some transparency.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.060 seconds)
+   **Total running time of the script:** ( 0 minutes  2.270 seconds)
+
+**Estimated memory usage:**  87 MB
 
 
 .. _sphx_glr_download_gallery_plot_combining_maps.py:

@@ -3,7 +3,6 @@ Combining Maps
 ==============
 """
 
-
 ###############################################################################
 # In this example we'll show how to combine maps so to get a more detailed
 # view of Brazil.
