@@ -33,7 +33,7 @@ def get_map(service, baseurl=None, service_type="MapServer", layer=0):
         get_all_features(service, baseurl, service_type, layer), axis="rows"
     )
     gdf = gpd.GeoDataFrame(maps)
-    gdf.iloc[:, 1] = utils.from_iso_8859_1_to_utf_8(gdf.iloc[:, 1])
+    gdf.iloc[:, 1] = utils.from_iso88591_to_utf8(gdf.iloc[:, 1])
     return gdf
 
 

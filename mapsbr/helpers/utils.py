@@ -34,7 +34,11 @@ def get_features(geojson):
 
 
 @np.vectorize
-def from_iso_8859_1_to_utf_8(string):
+def from_iso88591_to_utf8(string):
+    """
+    Convert weird characters to UTF-8.
+    For example, "mÃ©dio" should be "médio".
+    """
     try:
         return bytes(string, "iso-8859-1").decode("utf-8")
     except UnicodeDecodeError:
