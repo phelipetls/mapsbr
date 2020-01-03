@@ -1,6 +1,7 @@
 import os
 import sys
 import unittest
+from unittest.mock import patch, Mock
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -27,6 +28,11 @@ class TestUtils(unittest.TestCase):
         D = {"invalid": "geojson"}
         with self.assertRaises(KeyError):
             utils.get_features(D)
+
+    def test_from_iso_to_utf8(self):
+        test = utils.from_iso88591_to_utf8("mÃ©dio")
+        correct = "médio"
+        self.assertEqual(test, correct)
 
 
 if __name__ == "__main__":
