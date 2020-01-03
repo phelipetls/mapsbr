@@ -68,6 +68,11 @@ resolutions = {
 
 
 def parse_geojson(geojson):
+    """
+    Helper function to parse GeoJSON
+    so as to get all geometries in all
+    features.
+    """
     features = utils.get_features(geojson)
     return [shapely.geometry.shape(feature["geometry"]) for feature in features]
 

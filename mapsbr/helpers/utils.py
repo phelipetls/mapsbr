@@ -1,23 +1,22 @@
 import numpy as np
 
 
-def memoize(function):
-    cache = {}
-
-    def decorated_function(arg, *args, **kwargs):
-        if arg not in cache:
-            cache[arg] = function(arg, *args, **kwargs)
-        return cache[arg]
-    return decorated_function
-
-
 @np.vectorize
 def vectorized_get(dictionary, key):
+    """
+    Helper vectorized function to get keys
+    from a dictionary.
+    """
     return dictionary.get(key, -1)
 
 
 @np.vectorize
 def is_number(x):
+    """
+    Helper vectorized function to test
+    if a value is or represents a number,
+    i.e., an integer.
+    """
     try:
         int(x)
         return True
@@ -26,6 +25,12 @@ def is_number(x):
 
 
 def get_features(geojson):
+    """
+    Helper function to extract features
+    from dictionary. If it doesn't find
+    it, raise a value error with a more
+    informative error message.
+    """
     try:
         features = geojson["features"]
     except KeyError:

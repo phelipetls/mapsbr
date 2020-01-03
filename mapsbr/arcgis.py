@@ -7,7 +7,7 @@ from .helpers.request import get_geojson
 
 def get_map(service, baseurl=None, service_type="MapServer", layer=0):
     """
-    Get geometries associated with an ARCGIS url.
+    Get geometries associated with an ARCGIS host service.
 
     Parameters
     ----------
