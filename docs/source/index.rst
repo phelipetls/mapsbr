@@ -28,6 +28,9 @@ It's then, for example, trivial to plot a map or to make a `choropleth map <http
 
 This package is inspired by the R package `geobr <https://github.com/ipeaGIT/geobr>`__.
 
+Check out my other package `seriesbr <https:/seriesbr.readthedocs.io>`__ if you're interested in getting data
+from BCB, IPEADATA or IBGE. It integrates well with this package, as you shall see in the examples.
+
 Main Features
 -------------
 
