@@ -50,7 +50,7 @@ map, e.g., with macroregions only, with some transparency.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.270 seconds)
+   **Total running time of the script:** ( 0 minutes  2.086 seconds)
 
 **Estimated memory usage:**  87 MB
 

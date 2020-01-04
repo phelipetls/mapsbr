@@ -96,7 +96,9 @@ the geographical distribution of municipal hospitals.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  6.499 seconds)
+   **Total running time of the script:** ( 0 minutes  11.767 seconds)
+
+**Estimated memory usage:**  34 MB
 
 
 .. _sphx_glr_download_gallery_plot_rio_de_janeiro_districts.py:

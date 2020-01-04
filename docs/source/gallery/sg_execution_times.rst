@@ -5,10 +5,10 @@
 
 Computation times
 =================
-**00:09.505** total execution time for **gallery** files:
+**00:08.302** total execution time for **gallery** files:
 
 +-------------------------------------------------------------------------------------------------------------------------+-----------+----------+
-| :ref:`sphx_glr_gallery_plot_rio_de_janeiro_favelas.py` (``plot_rio_de_janeiro_favelas.py``)                             | 00:09.505 | 105.9 MB |
+| :ref:`sphx_glr_gallery_plot_rio_de_janeiro_favelas.py` (``plot_rio_de_janeiro_favelas.py``)                             | 00:08.302 | 105.5 MB |
 +-------------------------------------------------------------------------------------------------------------------------+-----------+----------+
 | :ref:`sphx_glr_gallery_plot_choropleth_map_population.py` (``plot_choropleth_map_population.py``)                       | 00:00.000 | 0.0 MB   |
 +-------------------------------------------------------------------------------------------------------------------------+-----------+----------+

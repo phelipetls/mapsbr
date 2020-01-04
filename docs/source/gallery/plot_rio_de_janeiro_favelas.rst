@@ -60,7 +60,7 @@ This will give us a rough idea about which favela is the biggest:
     favelas["area"] = favelas.geometry.area
     favelas = favelas.sort_values("area", ascending=False)
 
-    favelas
+    favelas.head(20)
 
 
 
@@ -99,31 +99,31 @@ This will give us a rough idea about which favela is the biggest:
               <th>492</th>
               <td>POLYGON ((-43.49245 -22.86656, -43.49246 -22.8...</td>
               <td>Fazenda Coqueiro</td>
-              <td>1.015599e-04</td>
+              <td>0.000102</td>
             </tr>
             <tr>
               <th>538</th>
               <td>POLYGON ((-43.58956 -22.89900, -43.59166 -22.8...</td>
               <td>Nova Cidade</td>
-              <td>8.160836e-05</td>
+              <td>0.000082</td>
             </tr>
             <tr>
               <th>937</th>
               <td>MULTIPOLYGON (((-43.24500 -22.99100, -43.24506...</td>
               <td>Rocinha</td>
-              <td>7.385933e-05</td>
+              <td>0.000074</td>
             </tr>
             <tr>
               <th>870</th>
               <td>POLYGON ((-43.33619 -22.97368, -43.33656 -22.9...</td>
               <td>Rio das Pedras</td>
-              <td>5.048410e-05</td>
+              <td>0.000050</td>
             </tr>
             <tr>
               <th>326</th>
               <td>MULTIPOLYGON (((-43.26751 -22.85952, -43.26751...</td>
               <td>Morro do Alemão</td>
-              <td>4.539358e-05</td>
+              <td>0.000045</td>
             </tr>
             <tr>
               <th>...</th>
@@ -132,38 +132,38 @@ This will give us a rough idea about which favela is the biggest:
               <td>...</td>
             </tr>
             <tr>
-              <th>703</th>
-              <td>POLYGON ((-43.30936 -23.00281, -43.30935 -23.0...</td>
-              <td>Ilha da Gigóia - Lote 500</td>
-              <td>7.756680e-08</td>
+              <th>381</th>
+              <td>POLYGON ((-43.31591 -22.85675, -43.31599 -22.8...</td>
+              <td>Morro do Juramento</td>
+              <td>0.000027</td>
             </tr>
             <tr>
-              <th>288</th>
-              <td>POLYGON ((-43.24877 -22.85345, -43.24873 -22.8...</td>
-              <td>Avenida dos Campeões - Praça Elói de Andrade</td>
-              <td>7.395546e-08</td>
+              <th>384</th>
+              <td>MULTIPOLYGON (((-43.33766 -22.81993, -43.33782...</td>
+              <td>Vila Rica de Irajá</td>
+              <td>0.000027</td>
             </tr>
             <tr>
-              <th>239</th>
-              <td>POLYGON ((-43.25576 -22.88969, -43.25605 -22.8...</td>
-              <td>Engenheiro Alberto Moas, próxima ao nº 75</td>
-              <td>5.387290e-08</td>
+              <th>463</th>
+              <td>MULTIPOLYGON (((-43.29018 -22.85078, -43.29023...</td>
+              <td>Vila Proletária da Penha</td>
+              <td>0.000027</td>
             </tr>
             <tr>
-              <th>744</th>
-              <td>MULTIPOLYGON (((-43.43338 -22.99409, -43.43338...</td>
-              <td>Caminho do Bicho</td>
-              <td>2.707933e-08</td>
+              <th>627</th>
+              <td>POLYGON ((-43.63739 -22.91760, -43.63786 -22.9...</td>
+              <td>Divinéia</td>
+              <td>0.000027</td>
             </tr>
             <tr>
-              <th>717</th>
-              <td>POLYGON ((-43.40292 -22.97429, -43.40303 -22.9...</td>
-              <td>Vila Autódromo</td>
-              <td>1.689168e-08</td>
+              <th>936</th>
+              <td>POLYGON ((-43.24515 -22.99559, -43.24630 -22.9...</td>
+              <td>Vidigal</td>
+              <td>0.000026</td>
             </tr>
           </tbody>
         </table>
-        <p>1018 rows × 3 columns</p>
+        <p>20 rows × 3 columns</p>
         </div>
         <br />
         <br />
@@ -180,20 +180,26 @@ This will be straight-forward to do with annotate method of matplotlib.
 
     import matplotlib.pyplot as plt
 
-    fig, ax = plt.subplots(figsize=(10, 7))
+    fig, ax = plt.subplots(figsize=(10, 5))
 
-    districts.plot(color="white", edgecolor="grey", alpha=0.3, ax=ax)
-    favelas.plot(column="Nome", ax=ax)
+    districts.plot(color="white", edgecolor="lightgray", ax=ax)
+    favelas.plot(color="black", ax=ax)
+    favelas.query("Nome in @favelas.Nome.head()").plot(color="tab:orange", ax=ax)
 
     ax.axis("off")
-    ax.set_title("Favelas in Rio de Janeiro city\nBiggest 5 highlighted")
+    ax.set_title("Favelas in Rio de Janeiro city\nBiggest 5 in area highlighted")
 
     for _, row in favelas.head().iterrows():
         ax.annotate(
             row.Nome,
             xy=(row.point.x, row.point.y),
-            xytext=(0, 1),
+            xytext=(5, 10),
             textcoords="offset points",
+            arrowprops=dict(
+                arrowstyle="->", color="black", ls="--", connectionstyle="angle3"
+            ),
+            bbox=dict(boxstyle="round", alpha=0.8, facecolor="white"),
+            color="k", fontsize="small"
         )
 
 
@@ -208,9 +214,9 @@ This will be straight-forward to do with annotate method of matplotlib.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  9.505 seconds)
+   **Total running time of the script:** ( 0 minutes  8.302 seconds)
 
-**Estimated memory usage:**  106 MB
+**Estimated memory usage:**  105 MB
 
 
 .. _sphx_glr_download_gallery_plot_rio_de_janeiro_favelas.py:

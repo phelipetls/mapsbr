@@ -354,9 +354,9 @@ Once we have it, let's now plot it.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  51.756 seconds)
+   **Total running time of the script:** ( 0 minutes  23.501 seconds)
 
-**Estimated memory usage:**  121 MB
+**Estimated memory usage:**  41 MB
 
 
 .. _sphx_glr_download_gallery_plot_highways_railways_and_hidrographies.py:

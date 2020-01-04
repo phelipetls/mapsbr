@@ -164,7 +164,7 @@ you'll need to call the `set_geometry("geometries_column")` method on the `GeoDa
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  4.400 seconds)
+   **Total running time of the script:** ( 0 minutes  8.338 seconds)
 
 **Estimated memory usage:**  19 MB
 

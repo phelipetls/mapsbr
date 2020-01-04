@@ -51,12 +51,14 @@ favelas["point"] = favelas.geometry.centroid  # calculate the center of the geom
 
 import matplotlib.pyplot as plt
 
-fig, ax = plt.subplots(figsize=(10, 7))
-districts.plot(color="tab:gray", edgecolor="white", ax=ax)
-favelas.plot(color="tab:orange", ax=ax)
+fig, ax = plt.subplots(figsize=(10, 5))
+
+districts.plot(color="white", edgecolor="lightgray", ax=ax)
+favelas.plot(color="black", ax=ax)
+favelas.query("Nome in @favelas.Nome.head()").plot(color="tab:orange", ax=ax)
 
 ax.axis("off")
-ax.set_title("Favelas in Rio de Janeiro city\nBiggest 5 highlighted")
+ax.set_title("Favelas in Rio de Janeiro city\nBiggest 5 in area highlighted")
 
 for _, row in favelas.head().iterrows():
     ax.annotate(
@@ -64,7 +66,9 @@ for _, row in favelas.head().iterrows():
         xy=(row.point.x, row.point.y),
         xytext=(5, 10),
         textcoords="offset points",
-        arrowprops=dict(arrowstyle="->", connectionstyle="angle3"),
-        bbox=dict(boxstyle="round", alpha=.7, facecolor="gray"),
-        color="k"
+        arrowprops=dict(
+            arrowstyle="->", color="black", ls="--", connectionstyle="angle3"
+        ),
+        bbox=dict(boxstyle="round", alpha=0.8, facecolor="white"),
+        color="k", fontsize="small"
     )
