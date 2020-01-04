@@ -47,15 +47,14 @@ favelas.head(20)
 #
 # This will be straight-forward to do with annotate method of matplotlib.
 
-favelas["point"] = favelas.geometry.centroid  # calculate the center of the geometry
+favelas["point"] = favelas.geometry.centroid  # calculate the geometry centroid
 
 import matplotlib.pyplot as plt
 
-fig, ax = plt.subplots(figsize=(10, 5))
-
-districts.plot(color="white", edgecolor="lightgray", ax=ax)
-favelas.plot(color="black", ax=ax)
-favelas.query("Nome in @favelas.Nome.head()").plot(color="tab:orange", ax=ax)
+fig, ax = plt.subplots(figsize=(10, 7))
+districts.plot(color="white", edgecolor="silver", ax=ax)
+favelas.plot(color="slategray", ax=ax)
+favelas.query("Nome in @favelas.Nome.head()").plot(color="steelblue", ax=ax)
 
 ax.axis("off")
 ax.set_title("Favelas in Rio de Janeiro city\nBiggest 5 in area highlighted")
@@ -66,9 +65,7 @@ for _, row in favelas.head().iterrows():
         xy=(row.point.x, row.point.y),
         xytext=(5, 10),
         textcoords="offset points",
-        arrowprops=dict(
-            arrowstyle="->", color="black", ls="--", connectionstyle="angle3"
-        ),
-        bbox=dict(boxstyle="round", alpha=0.8, facecolor="white"),
-        color="k", fontsize="small"
+        arrowprops=dict(arrowstyle="->", color="black", connectionstyle="angle3"),
+        bbox=dict(boxstyle="round", alpha=.7, facecolor="silver"),
+        color="k"
     )

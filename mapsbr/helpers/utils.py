@@ -10,15 +10,27 @@ def vectorized_get(dictionary, key):
     return dictionary.get(key, -1)
 
 
-@np.vectorize
-def is_number(x):
+def is_iter(something):
     """
     Helper vectorized function to test
-    if a value is or represents a number,
-    i.e., an integer.
+    if something is an iterable other
+    than a str.
     """
     try:
-        int(x)
+        iter(something)
+        return True and not isinstance(something, str)
+    except TypeError:
+        return False
+
+
+@np.vectorize
+def is_number(something):
+    """
+    Helper vectorized function to test
+    if a value is or represents a number.
+    """
+    try:
+        int(something)
         return True
     except ValueError:
         return False

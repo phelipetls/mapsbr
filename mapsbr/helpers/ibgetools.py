@@ -27,13 +27,10 @@ def ibge_encode(locations, geolevel):
     ValueError
         If invalid geographic level is passed.
     """
-    if geolevel is None:
-        geolevel = "state"
-        print("Using 'state' as geographic level to encode location name")
     err_msg = "Cannot encode numbers or strings representing numbers"
     # assert that all values do not represent / are numbers
     assert not utils.is_number(locations).all(), err_msg
-    return utils.vectorized_get(map_name_to_code(geolevel), locations)
+    return utils.vectorized_get(name_to_code(geolevel), locations)
 
 
 def ibge_decode(locations, geolevel):
@@ -59,15 +56,12 @@ def ibge_decode(locations, geolevel):
         If all values passed are strings or
         if invalid geographic level is passed.
     """
-    if geolevel is None:
-        geolevel = "state"
-        print("Using 'state' as geographic level to encode location name")
     # assert all values are numbers
     assert utils.is_number(locations).all(), "Cannot decode strings"
-    return utils.vectorized_get(map_code_to_name(geolevel), locations)
+    return utils.vectorized_get(code_to_name(geolevel), locations)
 
 
-def map_name_to_code(geolevel):
+def name_to_code(geolevel):
     """
     Make dictionary to map location name
     to IBGE code.
@@ -77,7 +71,7 @@ def map_name_to_code(geolevel):
     return {location["nome"]: location["id"] for location in locations}
 
 
-def map_code_to_name(geolevel):
+def code_to_name(geolevel):
     """
     Make dictionary to map location code
     to IBGE name.
@@ -89,22 +83,33 @@ def map_code_to_name(geolevel):
 
 def build_url(geolevel):
     baseurl = "https://servicodados.ibge.gov.br/api/v1/localidades/"
-    location = arguments_dict.get(geolevel, None)
-    if location is None:
+    if geolevel is None:
         raise ValueError(f"{geolevel.capitalize()} is not a valid geographic level")
+    location = arguments_dict.get(geolevel, None)
     url = f"{baseurl}{location}"
     return url
 
 
 arguments_dict = {
     "estado": "estados",
+    "estados": "estados",
     "state": "estados",
+    "states": "estados",
     "mesorregiao": "mesorregioes",
+    "mesorregioes": "mesorregioes",
     "mesoregion": "mesorregioes",
+    "mesoregions": "mesorregioes",
     "macrorregiao": "regioes",
+    "macrorregioes": "regioes",
     "macroregion": "regioes",
+    "macroregions": "regioes",
     "microrregiao": "microrregioes",
+    "microrregiao": "microrregioes",
+    "microrregioes": "microrregioes",
     "microregion": "microrregioes",
+    "microregions": "microrregioes",
     "municipio": "municipios",
+    "municipios": "municipios",
     "municipality": "municipios",
+    "municipalities": "municipios",
 }

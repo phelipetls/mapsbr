@@ -37,3 +37,5 @@ _codebraid
 .coverage
 .coverage.*
 
+# docs
+docs/source/auto_examples/

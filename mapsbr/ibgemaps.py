@@ -1,6 +1,5 @@
 import shapely
 import functools
-import numpy as np
 import geopandas as gpd
 from .helpers import utils, ibgetools
 from .helpers.request import get_geojson
@@ -33,6 +32,7 @@ def get_map(location, including=None, geolevel=None):
         A GeoSeries with shapely objects only.
     """
     if isinstance(location, str) and location != "BR":
+        assert geolevel, "You need to specify which geographic level this location is"
         location = ibgetools.ibge_encode(location, geolevel)
     if location == -1:
         return gpd.GeoSeries(shapely.geometry.Polygon([]))
@@ -54,15 +54,25 @@ def build_url(code, including=None):
 
 
 resolutions = {
+    "macrorregiao": 1,
     "macrorregioes": 1,
+    "macroregion": 1,
     "macroregions": 1,
+    "estado": 2,
     "estados": 2,
+    "state": 2,
     "states": 2,
+    "mesorregiao": 3,
     "mesorregioes": 3,
-    "mesoregions": 3,
+    "mesorregion": 3,
+    "mesorregions": 3,
+    "microrregiao": 4,
     "microrregioes": 4,
+    "microrregion": 4,
     "microregions": 4,
+    "municipio": 5,
     "municipios": 5,
+    "municipalitie": 5,
     "municipalities": 5,
 }
 
@@ -77,17 +87,15 @@ def parse_geojson(geojson):
     return [shapely.geometry.shape(feature["geometry"]) for feature in features]
 
 
-@np.vectorize
-@functools.lru_cache(maxsize=16)
-def geocode(location, geolevel=None):
+def geocode(locations, geolevel=None):
     """
-    Vectorized function to turn location
+    Function to turn several locations
     code or name into its corresponding
     geometric shapely object.
 
     Parameters
     ----------
-    locations : iterable
+    locations : str, int, iterable
         Locations' names
 
     geolevel : str, default None
@@ -96,12 +104,25 @@ def geocode(location, geolevel=None):
 
     Returns
     -------
-    ndarray
-        Numpy array with shapely geometric
-        objects.
+    shapely objects
+        shapely object or list of shapely objects
+    """
+    if utils.is_iter(locations):
+        return [get_geometry(location, geolevel) for location in locations]
+    else:
+        return get_geometry(locations, geolevel)
+
+
+@functools.lru_cache(maxsize=None)
+def get_geometry(location, geolevel):
+    """
+    Get geometry of a single location code/name
     """
     if not utils.is_number(location) and location != "BR":
+        assert geolevel, "You need to specify which geographic level this location is"
         location = ibgetools.ibge_encode(location, geolevel)
+    if location == -1:
+        return shapely.geometry.Polygon([])
     url = build_url(location)
     geojson = get_geojson(url)
     features = utils.get_features(geojson)
