@@ -29,15 +29,6 @@ class TestIbgeEncode(unittest.TestCase):
         correct = 33
         self.assertEqual(test, correct)
 
-    def test_ibge_encode_when_geolevel_is_none(self):
-        ibgetools.map_name_to_code = Mock()
-        ibgetools.ibge_encode(["Rio de Janeiro", "Rondônia", "Acre"], None)
-        ibgetools.map_name_to_code.assert_called_once_with("state")
-
-    def test_ibge_encode_if_raises_when_invalid_geo(self):
-        with self.assertRaises(ValueError):
-            ibgetools.ibge_encode("Rio de Janeiro", "invalid")
-
     def test_ibge_encode_if_raises_when_invalid_location_name_str(self):
         with self.assertRaises(AssertionError):
             ibgetools.ibge_encode(["0", "1"], "state")
@@ -61,15 +52,6 @@ class TestIbgeDecode(unittest.TestCase):
         test = ibgetools.ibge_decode(locations, "state")
         correct = "Rio de Janeiro"
         self.assertEqual(test, correct)
-
-    def test_ibge_decode_when_geolevel_is_none(self):
-        ibgetools.map_code_to_name = Mock()
-        ibgetools.ibge_decode([33, 11, 12], None)
-        ibgetools.map_code_to_name.assert_called_once_with("state")
-
-    def test_ibge_decode_if_raises_when_invalid_geo(self):
-        with self.assertRaises(ValueError):
-            ibgetools.ibge_decode(33, "invalid")
 
     def test_ibge_decode_if_raises_when_invalid_location_name_int(self):
         with self.assertRaises(AssertionError):
