@@ -40,7 +40,7 @@ favelas = arcgis.get_map(
 favelas["area"] = favelas.geometry.area
 favelas = favelas.sort_values("area", ascending=False)
 
-favelas
+favelas.head(20)
 
 ###############################################################################
 # Now, here is what I wanna do: highlight the five biggest ones.
@@ -52,9 +52,8 @@ favelas["point"] = favelas.geometry.centroid  # calculate the center of the geom
 import matplotlib.pyplot as plt
 
 fig, ax = plt.subplots(figsize=(10, 7))
-
-districts.plot(color="white", edgecolor="grey", alpha=0.3, ax=ax)
-favelas.plot(column="Nome", ax=ax)
+districts.plot(color="tab:gray", edgecolor="white", ax=ax)
+favelas.plot(color="tab:orange", ax=ax)
 
 ax.axis("off")
 ax.set_title("Favelas in Rio de Janeiro city\nBiggest 5 highlighted")
@@ -63,6 +62,9 @@ for _, row in favelas.head().iterrows():
     ax.annotate(
         row.Nome,
         xy=(row.point.x, row.point.y),
-        xytext=(0, 1),
+        xytext=(5, 10),
         textcoords="offset points",
+        arrowprops=dict(arrowstyle="->", connectionstyle="angle3"),
+        bbox=dict(boxstyle="round", alpha=.7, facecolor="gray"),
+        color="k"
     )
