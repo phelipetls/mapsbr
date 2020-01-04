@@ -25,10 +25,11 @@ MapsBR: Brazilian geospatial data in Python
 **mapsbr** is a Python package to help you get brazilian geospatial data
 from official sources like IBGE or an ArcGIS server.
 
-It requests GeoJSON from official webservices and turn them into ``shapely``
-geometric objects, that are then passed into a geopandas structure, a GeoSeries
-or a GeoDataFrame, which are the usual pandas structure but with more capabilities
-concerning geospatial data.
+It downloads a GeoJSON from official datasets and turn them into ``shapely``
+geometric objects, that are then passed into a `geopandas
+<https://geopandas.readthedocs.io/en/latest/>`__ structure, a ``GeoSeries`` or a
+``GeoDataFrame``, which is a usual pandas ``Series`` and ``DataFrame`` but with more
+capabilities concerning geospatial data.
    
 .. raw:: html
          
@@ -44,7 +45,7 @@ concerning geospatial data.
 
    Installation <installation>
    Introduction <introduction>
-   Gallery <auto_gallery/index>
+   Examples <auto_examples/index>
    API Reference <api/modules>
 
 .. raw:: html

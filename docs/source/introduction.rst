@@ -6,10 +6,10 @@ Let's learn the basics on how to use each module.
 ibgemaps
 --------
 
-The function :py:func:`mapsbr.ibgemaps.get_map` gives you a GeoSeries with a
-bunch of geometric objects depending on what you pass into it.
+Maybe the most useful function here is :py:func:`mapsbr.ibgemaps.get_map`. It
+lets you get geometric objects associated with a geographic space.
 
-For example, if you want a map of the whole country including states, you'd
+For example, if you want a map of Brazil including states, you'd
 call:
 
 .. ipython:: python
@@ -20,34 +20,39 @@ call:
    ibgemaps.get_map("BR", including="states").plot()
 
 
-But, suppose if you want the Amazonas state map including municipalities. You
-would then actually need to know the Amazonas's IBGE code, but in fact you can
-just pass the state name and specify its geographic level.
+Or, supposing you want the Amazonas state map with municipalities, you would call:
 
 .. ipython:: python
 
    @savefig amazonas_with_municipalities.png
    ibgemaps.get_map("Amazonas", including="municipalities", geolevel="state").plot()
 
-Another very useful function is :py:func`mapsbr.ibgemaps.geocode` which gives
-you the geometric object associated with the passed value. If it doesn't find
-any, it returns an empty geometry.
+Notice that you need to specify if it is a state, a municipality, etc., the
+location geographic level. This avoid unambiguity, e.g., "Rio de Janeiro" is
+both a state and a municipality.
+
+Another useful function is :py:func:`mapsbr.ibgemaps.geocode`, which is a more
+specialized function to convert locations names into geometric objects (it doesn't
+return a GeoSeries like :py:func:`mapsbr.ibgemaps.get_map`).
 
 .. ipython:: python
    
-   ibgemaps.geocode(["Rio de Janeiro"], geolevel="state")
+   ibgemaps.geocode("Rio de Janeiro", geolevel="state")
 
-This is most useful when you want the geometric objects of DataFrame column, for example.
-You would then just call.
+It's useful when you want to convert a location names column into a geometry column:
 
 .. ipython:: python
 
    import geopandas as gpd
 
    states = ["Rio de Janeiro", "Minas Gerais", "São Paulo", "Espírito Santo"]
-   gpd.GeoDataFrame({"states": states, "geometry": ibgemaps.geocode(states, geolevel="state")})
+   gdf = gpd.GeoDataFrame({"states": states})
+
+   gdf["geometry"] = ibgemaps.geocode(gdf.states, geolevel="state")
+
+   gdf
 
 arcgis
 ------
 
-This module is less high level
+
