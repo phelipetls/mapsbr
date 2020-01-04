@@ -43,8 +43,8 @@ extensions = [
 # Sphinx-Gallery configuration
 sphinx_gallery_conf = {
     "examples_dirs": "examples",  # path to your example scripts
-    "gallery_dirs": "gallery",  # path to where to save gallery generated output
-    'show_memory': True,
+    "gallery_dirs": "auto_examples",  # path to where to save gallery generated output
+    "show_memory": True,
 }
 
 import warnings
@@ -67,7 +67,18 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinxdoc'
+html_theme = "bootstrap"
+
+html_theme_options = {
+    "navbar_title": "MapsBR",
+    "navbar_links": [
+        ("Examples", "gallery/index")
+    ],
+    "navbar_sidebarrel": False,
+    "bootswatch_theme": "flatly"
+}
+
+pygments_style = "sphinx"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
