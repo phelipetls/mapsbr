@@ -64,4 +64,4 @@ capabilities concerning geospatial data.
       </div>
    </div>
 
-.. |maps| image:: _static/brazilian_maps.png
+.. |maps| image:: _static/maps.png
