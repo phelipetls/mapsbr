@@ -44,7 +44,7 @@ capabilities concerning geospatial data.
    :maxdepth: 1 
 
    Installation <installation>
-   Introduction <introduction>
+   Tutorial <tutorial>
    Examples <auto_examples/index>
    API Reference <api/modules>
 

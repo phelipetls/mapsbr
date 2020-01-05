@@ -72,8 +72,8 @@ html_theme = "bootstrap"
 html_theme_options = {
     "navbar_title": "MapsBR",
     "navbar_links": [
+        ("Tutorial", "tutorial"),
         ("Examples", "auto_examples/index"),
-        ("GitHub", "https://github.com/phelipetls/mapsbr", True),
     ],
     "navbar_sidebarrel": False,
     "bootswatch_theme": "flatly"
