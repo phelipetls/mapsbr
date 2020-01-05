@@ -68,11 +68,11 @@ resolutions = {
     "mesoregions": 3,
     "microrregiao": 4,
     "microrregioes": 4,
-    "microrregion": 4,
+    "microregion": 4,
     "microregions": 4,
     "municipio": 5,
     "municipios": 5,
-    "municipalitie": 5,
+    "municipalitiy": 5,
     "municipalities": 5,
 }
 
