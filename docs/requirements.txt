@@ -1,5 +1,6 @@
 sphinx
 mapsbr
+sphinx-bootstrap-theme
 sphinx-gallery
 seriesbr
 IPython
