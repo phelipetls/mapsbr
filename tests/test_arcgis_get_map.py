@@ -38,14 +38,28 @@ def get_downloaded_search_result(n):
         return json.load(jsonfile)
 
 
+def get_downloaded_layers(n):
+    jsonpath = Path(__file__).resolve().parent / "sample_jsons" / "layers"
+    with jsonpath.open() as jsonfile:
+        return json.load(jsonfile)
+
+
 class TestArcGIS_Search(unittest.TestCase):
 
     @patch("mapsbr.arcgis.get_geojson", get_downloaded_search_result)
-    def setUp(self):
-        self.search_results = arcgis.search()
+    def test_if_search_services_is_not_none(self):
+        search_results = arcgis.services()
+        self.assertFalse(search_results.empty)
 
-    def test_if_search_results_are_not_none(self):
-        self.assertFalse(self.search_results.empty)
+    @patch("mapsbr.arcgis.get_geojson", get_downloaded_search_result)
+    def test_if_search_folders_is_not_none(self):
+        search_results = arcgis.folders()
+        self.assertFalse(search_results.empty)
+
+    @patch("mapsbr.arcgis.get_geojson", get_downloaded_layers)
+    def test_if_search_layers_is_not_none(self):
+        search_results = arcgis.layers("FAUNA")
+        self.assertFalse(search_results.empty)
 
 
 if __name__ == "__main__":

@@ -84,26 +84,77 @@ def parse_geojson(geojson):
     ]
 
 
-def search(where="services", baseurl=None):
+def folders(folder=None, baseurl=None):
     """
-    Search available resources in a given host.
+    Search available folders in a ArcGIS server.
 
     Parameters
     ----------
     baseurl : str, default None
-        Base url or host. By default, it will
+        Server url. By default, it will
         be https://mapasinterativos.ibge.gov.br/arcgis/rest/services
 
-    where : str, default "services"
-        Where to search, valid values are "folders" or "services"
+    folder : str, default None
+        Path to search for folders.
 
     Returns
     -------
     DataFrame
+        A DataFrame listing folders.
     """
     if baseurl is None:
         baseurl = "https://mapasinterativos.ibge.gov.br/arcgis/rest/services"
-    services = get_geojson(f"{baseurl}?f=json")[where]
-    return pd.DataFrame(services)
+    folder = f"/{folder}" if folder else ""
+    result = get_geojson(f"{baseurl}{folder}?f=json")
+    return pd.DataFrame(result["folders"])
+
+
+def services(folder=None, baseurl=None):
+    """
+    Search available services in a ArcGIS server folder.
+
+    Parameters
+    ----------
+    baseurl : str, default None
+        Server url. By default, it will
+        be https://mapasinterativos.ibge.gov.br/arcgis/rest/services
+
+    folder : str, default None
+        Path to search for services.
+
+    Returns
+    -------
+    DataFrame
+        A DataFrame listing services.
+    """
+    if baseurl is None:
+        baseurl = "https://mapasinterativos.ibge.gov.br/arcgis/rest/services"
+    folder = f"/{folder}" if folder else ""
+    result = get_geojson(f"{baseurl}{folder}?f=json")
+    return pd.DataFrame(result["services"])
+
+
+def layers(service_path, baseurl=None):
+    """
+    Search available layers in a ArcGIS service.
+
+    Parameters
+    ----------
+    service_path : str
+        Path to service.
+
+    baseurl : str, default None
+        Server url. By default, it will
+        be https://mapasinterativos.ibge.gov.br/arcgis/rest/services
+
+    Returns
+    -------
+    DataFrame
+        A DataFrame listing service layers.
+    """
+    if baseurl is None:
+        baseurl = "https://mapasinterativos.ibge.gov.br/arcgis/rest/services"
+    result = get_geojson(f"{baseurl}/{service_path}/MapServer?f=json")
+    return pd.DataFrame(result["layers"]).iloc[:, :2]
 
 # vi: nowrap
