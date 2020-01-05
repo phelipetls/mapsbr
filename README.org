@@ -7,11 +7,11 @@
   *mapsbr* is a Python package to help you get brazilian geospatial
 data from official sources like IBGE or ArcGIS API.
 
-  First it downloads a GeoJSON from the web with [[https://2.python-requests.org/en/master/][requests]], which
-gets parsed by [[https://shapely.readthedocs.io/en/latest/manual.html#predicates-and-relationships][shapely]] and passed into a [[http://geopandas.org/][geopandas]] structure, a
-=GeoSeries= or a =GeoDataFrame=, which is your typical
-=pandas.DataFrame= but with magic properties and methods regarding
-=shapely= geometric objects on top of it.
+  First it downloads a GeoJSON from the web with [[https://2.python-requests.org/en/master/][requests]], which gets
+parsed by [[https://shapely.readthedocs.io/en/latest/manual.html#predicates-and-relationships][shapely]] and passed into a [[http://geopandas.org/][geopandas]] structure, a =GeoSeries=
+or a =GeoDataFrame=, which is your typical =pandas.DataFrame= but with
+magic properties and methods regarding =shapely= geometric objects on
+top of it.
 
   It's then, for example, trivial to plot a map or to make a
 [[https://en.wikipedia.org/wiki/Choropleth_map][choropleth map]] with =geopandas=. It does it very well with the help of
@@ -45,7 +45,7 @@ geographic_levels = ["macroregions", "states", "mesoregions", "microregions", "m
 for level, ax in zip(geographic_levels, axes.flat):
     ax.axis("off")
     ax.set_title("Brazil map with\n{}".format(level))
-    ibgemaps.get_map("BR", including=level).plot(color="steelblue", edgecolor="khaki", ax=ax)
+    ibgemaps.get_map("BR", including=level).plot(color="white", edgecolor="#2c3e50", ax=ax)
 
 for ax in axes.flat:
     if not ax.has_data():
