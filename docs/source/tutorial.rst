@@ -27,9 +27,8 @@ Or, supposing you want the Amazonas state map with municipalities, you would cal
    @savefig amazonas_with_municipalities.png
    ibgemaps.get_map("Amazonas", including="municipalities", geolevel="state").plot()
 
-Notice that you need to specify if it is a state, a municipality, etc., the
-location geographic level. This avoid unambiguity, e.g., "Rio de Janeiro" is
-both a state and a municipality.
+Notice that you need to specify if it is a state, a municipality, etc. This
+avoid ambiguity, e.g., "Rio de Janeiro" is both a state and a municipality.
 
 Another useful function is :py:func:`mapsbr.ibgemaps.geocode`, which is a more
 specialized function to convert locations names into geometric objects (it doesn't
@@ -39,7 +38,8 @@ return a GeoSeries like :py:func:`mapsbr.ibgemaps.get_map`).
    
    ibgemaps.geocode("Rio de Janeiro", geolevel="state")
 
-It's useful when you want to convert a location names column into a geometry column:
+It's useful when you want to convert a column with location names into a
+geometric column:
 
 .. ipython:: python
 
@@ -47,6 +47,8 @@ It's useful when you want to convert a location names column into a geometry col
 
    states = ["Rio de Janeiro", "Minas Gerais", "São Paulo", "Espírito Santo"]
    gdf = gpd.GeoDataFrame({"states": states})
+   
+   gdf
 
    gdf["geometry"] = ibgemaps.geocode(gdf.states, geolevel="state")
 
@@ -78,7 +80,7 @@ As it shall be illustrated next, by default it will search in a `IBGE server
 
    arcgis.services().head()
 
-Now, imagine you're interested in FAUNA service. You can take a look at the
+Now, imagine you're interested in the FAUNA service. You can take a look at the
 available feature layers like this:
 
 .. ipython:: python
