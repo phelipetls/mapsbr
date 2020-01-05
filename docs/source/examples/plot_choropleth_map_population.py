@@ -14,23 +14,21 @@ from seriesbr import ibge
 
 population = ibge.get_series(6462, 606, macroregions=True, last_n=1)
 
-population
-
 ###############################################################################
-# Then let's convert this `DataFrame` into a `GeoDataFrame` and assign
+# Then let's convert this ``DataFrame`` into a ``GeoDataFrame`` by assigning
 # to a column named "geometry" the macroregions' geometric objects.
 #
 # You can get a geometric object for a given location with the function
 # :py:func:`mapsbr.ibgemaps.geocode`. It can either be a location code or name. If
-# it's a name, you'll need to pass its geographic level as the argument `geolevel` so
-# it can properly get converted to a code.
+# it's a name, you'll need to pass which is its geographic level to avoid ambiguity.
 #
-# For example, `ibgemaps.geocode("Rio de Janeiro", geolevel="state")` if you want Rio
-# de Janeiro state map or `ibgemaps.geocode("Rio de Janeiro", geolevel="municipality")` if
+# For example, ``ibgemaps.geocode("Rio de Janeiro", geolevel="state")`` if you want Rio
+# de Janeiro state map or ``ibgemaps.geocode("Rio de Janeiro", geolevel="municipality")`` if
 # the map for Rio de Janeiro city.
 #
-# Notice that the column with the geometric objects *has* to be named geometry. Otherwise
-# you'll need to call the `set_geometry("geometries_column")` method on the `GeoDataFrame`.
+# Notice that the column with the geometric objects **has** to be named geometry. Otherwise
+# you'll need to call the ``set_geometry("geometries_column")`` method on the
+# ``GeoDataFrame``.
 
 import geopandas as gpd
 from mapsbr import ibgemaps

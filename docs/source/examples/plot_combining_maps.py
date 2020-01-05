@@ -4,7 +4,7 @@ Combining Maps
 """
 
 ###############################################################################
-# In this example we'll show how to combine maps so to get a more detailed
+# In this example we'll show how to combine maps in order to get a more detailed
 # view of Brazil.
 #
 # A way to plot multiple polygons on top of another is to first plot the more
@@ -16,6 +16,6 @@ from mapsbr import ibgemaps
 states = ibgemaps.get_map("BR", including="states")
 macroregions = ibgemaps.get_map("BR", including="macroregions")
 
-ax = states.plot(color="white", edgecolor="black")
-macroregions.plot(color="white", edgecolor="black", alpha=.5, ax=ax)
+ax = states.plot(color="white", edgecolor="gray")
+macroregions.plot(color="white", edgecolor="midnightblue", alpha=.5, ax=ax)
 ax.axis("off")

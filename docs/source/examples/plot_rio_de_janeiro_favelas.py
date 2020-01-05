@@ -33,14 +33,12 @@ favelas = arcgis.get_map(
 
 ###############################################################################
 # Now, just to see what other interesting things we can do with GeoPandas
-# and the Shapely library in general: let's calculate the area of the geometry!
+# and the Shapely library in general: let's calculate the geometries' areas.
 #
 # This will give us a rough idea about which favela is the biggest:
 
 favelas["area"] = favelas.geometry.area
 favelas = favelas.sort_values("area", ascending=False)
-
-favelas.head(20)
 
 ###############################################################################
 # Now, here is what I wanna do: highlight the five biggest ones.
@@ -51,13 +49,13 @@ favelas["point"] = favelas.geometry.centroid  # calculate the geometry centroid
 
 import matplotlib.pyplot as plt
 
-fig, ax = plt.subplots(figsize=(10, 7))
-districts.plot(color="white", edgecolor="silver", ax=ax)
-favelas.plot(color="slategray", ax=ax)
-favelas.query("Nome in @favelas.Nome.head()").plot(color="steelblue", ax=ax)
+fig, ax = plt.subplots(figsize=(10, 7), constrained_layout=True)
+districts.plot(color="white", edgecolor="slategray", ax=ax)
+favelas.plot(color="orange", ax=ax)
+favelas.query("Nome in @favelas.Nome.head()").plot(color="gray", ax=ax)
 
 ax.axis("off")
-ax.set_title("Favelas in Rio de Janeiro city\nBiggest 5 in area highlighted")
+ax.set_title("Favelas in Rio\nBiggest 5 highlighted")
 
 for _, row in favelas.head().iterrows():
     ax.annotate(
@@ -66,6 +64,6 @@ for _, row in favelas.head().iterrows():
         xytext=(5, 10),
         textcoords="offset points",
         arrowprops=dict(arrowstyle="->", color="black", connectionstyle="angle3"),
-        bbox=dict(boxstyle="round", alpha=.7, facecolor="silver"),
-        color="k"
+        bbox=dict(boxstyle="round", alpha=0.7, facecolor="silver"),
+        color="k",
     )

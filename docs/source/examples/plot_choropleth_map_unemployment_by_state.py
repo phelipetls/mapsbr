@@ -5,7 +5,7 @@ Unemployment rate by state
 
 ###############################################################################
 #
-# In this example we'll visualize the most recent data on 
+# In this example we'll visualize the most recent data on
 # brazilian unemployment per state.
 #
 # Let's again retrieve the data with the `seriesbr <seriesbr.readthedocs.io>`_ package.
@@ -17,13 +17,13 @@ df = ibge.get_series(
 )
 
 ###############################################################################
-# Now let's convert this `DataFrame` into a `GeoDataFrame` after getting the
+# Now let's convert this ``DataFrame`` into a ``GeoDataFrame`` after getting the
 # geometric objects for each state.
 
 import geopandas as gpd
 from mapsbr import ibgemaps
 
-df = df.assign(geometry = ibgemaps.geocode(df["Unidade da Federação (Código)"]))
+df = df.assign(geometry=ibgemaps.geocode(df["Unidade da Federação (Código)"]))
 gdf = gpd.GeoDataFrame(df)
 
 
@@ -33,9 +33,7 @@ gdf = gpd.GeoDataFrame(df)
 import matplotlib.pyplot as plt
 
 fig, ax = plt.subplots()
-
-ax.axis("off");
+ax.axis("off")
 
 gdf.plot(column="Valor", cmap="OrRd", legend=True, ax=ax)
-
 plt.show()
