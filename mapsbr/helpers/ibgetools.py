@@ -83,8 +83,6 @@ def code_to_name(geolevel):
 
 def build_url(geolevel):
     baseurl = "https://servicodados.ibge.gov.br/api/v1/localidades/"
-    if geolevel is None:
-        raise ValueError(f"{geolevel.capitalize()} is not a valid geographic level")
     location = arguments_dict.get(geolevel, None)
     url = f"{baseurl}{location}"
     return url
