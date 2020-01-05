@@ -11,7 +11,7 @@ Learn more about it in our [repository](https://github.com/phelipetls/mapsbr) or
 
 setuptools.setup(
     name="mapsbr",
-    version="0.0.2",
+    version="0.0.3",
     author="Phelipe Teles",
     author_email="phelipe_teles@hotmail.com",
     description="Getting brazilian geospatial data with Python",
