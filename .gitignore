@@ -39,3 +39,6 @@ _codebraid
 
 # docs
 docs/source/auto_examples/
+
+# flake
+.flake8
