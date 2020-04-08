@@ -42,3 +42,4 @@ docs/source/auto_examples/
 
 # flake
 .flake8
+docs/source/savefig/*
